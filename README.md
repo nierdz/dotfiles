@@ -1,10 +1,24 @@
 # My personal tools
- - for now there is not much (will be updated soon)
+ - It uses ansible in a virtualenv to deploy my personal tools
+ - for now there is only some vim related stuffs
+ - I'll update this soon to add my mess
 
 # Requirements
- - You need to install `python` and `pip`
- - Then, install `virtualenv` as this:
+ - You need to be sudoers to use this `Makefile`
 ```
-pip install virtualenv
+user	ALL = NOPASSWD:ALL
 ```
- - You're good to go !
+ - Then, you can install dependencies:
+```
+make pre-install
+```
+
+# Usage
+ - First, you need to install ansible with:
+```
+make instal
+```
+ - Then you can run all ansible roles like this:
+```
+make run-ansible
+```

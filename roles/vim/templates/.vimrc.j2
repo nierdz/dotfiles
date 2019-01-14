@@ -1,0 +1,38 @@
+" {{ ansible_managed }}
+set nocompatible              " be iMproved, required
+filetype off                  " required
+set background=dark
+let base16colorspace=256
+set termguicolors
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'w0rp/ale'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'chriskempson/base16-vim'
+Plugin 'lepture/vim-jinja'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+" Ale
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+" Indent guides
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_guide_size = 1
+
+" Base16
+colorscheme base16-ia-dark
+
+" Markdown
+let g:vim_markdown_folding_disabled = 1

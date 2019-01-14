@@ -1,0 +1,28 @@
+---
+- name: Ensure git is installed
+  become: true
+  package:
+    name: "git"
+    state: present
+
+- name: Create Vim configuration directory
+  file:
+    path: "~/.vim"
+    state: directory
+
+- name: Create Vundle directory
+  file:
+    path: "~/.vim/bundle"
+    state: directory
+
+- name: Clone Vundle repository
+  git:
+    repo: "git@github.com:VundleVim/Vundle.vim.git"
+    dest: "~/.vim/bundle/Vundle.vim"
+    update: yes
+    force: yes
+    accept_hostkey: "no"
+    version: "{{ vundle_version }}"
+
+- name: Install Vundle plugins
+  command: "vim +PluginInstall +qall"

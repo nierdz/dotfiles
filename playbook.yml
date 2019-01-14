@@ -1,0 +1,7 @@
+---
+
+- name: Install vundle
+  hosts: localhost
+  roles:
+    - { role: vim, tags: ['vim'] }
+    - { role: vundle, tags: ['vundle'] }
