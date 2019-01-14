@@ -1,0 +1,7 @@
+---
+- name: Configure terminator
+  template:
+    src: .config/terminator/config.j2
+    dest: ~/.config/terminator/config
+  tags:
+    - terminator
