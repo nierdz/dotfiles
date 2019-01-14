@@ -1,7 +1,6 @@
 ---
 
 - name: Install vundle
-  hosts: local
-  become: true
+  hosts: localhost
   roles:
     - { role: vundle, tags: ['vundle'] }
