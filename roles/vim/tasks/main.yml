@@ -1,0 +1,5 @@
+---
+- name: Create .vimrc configuration file
+  template:
+    src: .vimrc.j2
+    dest: ~/.vimrc
