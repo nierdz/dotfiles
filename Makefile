@@ -30,3 +30,10 @@ install-ansible: ## Install ansible via pip
 		pip install --upgrade setuptools; \
 		pip install -r requirements.txt; \
 	)
+
+run-ansible: ## Run ansible on full playbook
+	$(info --> Run ansible on full playbook)
+	@( \
+		source $(VIRTUALENV_DIR)/bin/activate; \
+		ansible-playbook playbook.yml; \
+	)
