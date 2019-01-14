@@ -13,7 +13,7 @@ install: ## Install everything
 	@make install-ansible
 
 venv: ## Create python virtualenv if not exists
-	[[ -d $(VIRTUALENV_DIR) ]] || virtualenv $(VIRTUALENV_DIR)
+	[[ -d $(VIRTUALENV_DIR) ]] || virtualenv --system-site-packages $(VIRTUALENV_DIR)
 
 install-ansible: ## Install ansible via pip
 	$(info --> Install ansible via `pip`)
