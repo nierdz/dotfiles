@@ -5,3 +5,4 @@
   roles:
     - { role: vim, tags: ['vim'] }
     - { role: vundle, tags: ['vundle'] }
+    - { role: base16, tags: ['base16'] }
