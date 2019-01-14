@@ -8,6 +8,13 @@ help: ## Print this help
 		| sort \
 		| awk 'BEGIN { FS = ":.*?## " }; { printf "\033[36m%-30s\033[0m %s\n", $$1, $$2 }'
 
+pre-install: ## Install dependencies
+	$(info --> Install dependencies)
+	@( \
+		sudo apt update; \
+		sudo apt install python-pip python-apt; \
+	)
+
 install: ## Install everything
 	$(info --> Install everything)
 	@make install-ansible
