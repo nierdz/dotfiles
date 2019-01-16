@@ -4,6 +4,10 @@
   package:
     name: "git"
     state: present
+  register: git_installed
+  until: git_installed is success
+  retries: 10
+  delay: 2
 
 - name: Create Vim configuration directory
   file:
