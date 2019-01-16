@@ -44,4 +44,5 @@ ansible-lint: ## Run ansible-lint on all roles
 		source $(VIRTUALENV_DIR)/bin/activate; \
 		ansible-lint playbook.yml; \
 		ansible-playbook playbook.yml --syntax-check; \
+		yamllint -c .yamllint.yml .; \
 	)
