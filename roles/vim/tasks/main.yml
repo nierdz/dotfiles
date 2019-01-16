@@ -3,3 +3,10 @@
   template:
     src: .vimrc.j2
     dest: ~/.vimrc
+
+- name: Remove this shitty mouse support
+  become: true
+  replace:
+    path: /usr/share/vim/vim81/defaults.vim
+    regexp: '^  set mouse=a'
+    replace: '"  set mouse=a'
