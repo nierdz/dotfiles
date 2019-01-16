@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/nierdz/tools.svg?branch=master)](https://travis-ci.com/nierdz/tools)
+
 # My personal tools
  - It uses ansible in a virtualenv to deploy my personal tools
  - for now there is only some vim related stuffs
