@@ -37,3 +37,11 @@ run-ansible: ## Run ansible on full playbook
 		source $(VIRTUALENV_DIR)/bin/activate; \
 		ansible-playbook playbook.yml; \
 	)
+
+ansible-lint: ## Run ansible-lint on all roles
+	$(info --> Run ansible-lint on all roles)
+	@( \
+		source $(VIRTUALENV_DIR)/bin/activate; \
+		ansible-lint playbook.yml; \
+		ansible-playbook playbook.yml --syntax-check; \
+	)
