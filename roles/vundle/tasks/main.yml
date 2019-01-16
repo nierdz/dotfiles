@@ -23,8 +23,8 @@
   git:
     repo: "git@github.com:VundleVim/Vundle.vim.git"
     dest: "~/.vim/bundle/Vundle.vim"
-    update: yes
-    force: yes
+    update: true
+    force: true
     accept_hostkey: "no"
     version: "{{ vundle_version }}"
 
