@@ -1,0 +1,12 @@
+---
+sudo: required
+language: generic
+distro: xenial
+addons:
+  hostname: travis
+
+before_install:
+  - make pre-install
+
+script:
+  - make install
