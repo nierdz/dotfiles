@@ -21,11 +21,10 @@
 
 - name: Clone Vundle repository
   git:
-    repo: "git@github.com:VundleVim/Vundle.vim.git"
+    repo: "https://github.com/VundleVim/Vundle.vim.git"
     dest: "~/.vim/bundle/Vundle.vim"
     update: true
     force: true
-    accept_hostkey: "no"
     version: "{{ vundle_version }}"
 
 - name: Install Vundle plugins
