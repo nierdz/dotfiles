@@ -10,3 +10,4 @@
     path: /usr/share/vim/vim81/defaults.vim
     regexp: '^  set mouse=a'
     replace: '"  set mouse=a'
+  ignore_errors: true

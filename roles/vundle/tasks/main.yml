@@ -30,3 +30,4 @@
 
 - name: Install Vundle plugins
   command: "vim +PluginInstall +qall"
+  when: ansible_hostname != 'travis'
