@@ -1,4 +1,11 @@
 ---
+- name: Ensure terminator config directory exists
+  file:
+    path: ~/.config/terminator
+    state: directory
+  tags:
+    - terminator
+
 - name: Configure terminator
   template:
     src: .config/terminator/config.j2
