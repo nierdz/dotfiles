@@ -16,11 +16,15 @@ make pre-install
 ```
 
 # Usage
- - First, you need to install ansible with:
+ - Use `install` target to install everything:
 ```
 make install
 ```
- - Then you can run all ansible roles like this:
+ - If you don't want to install everything, you can run a specific target:
 ```
 make run-ansible
+```
+ - To get all targets from `Makefile`, use `help`:
+```
+make help
 ```
