@@ -12,7 +12,12 @@ pre-install: ## Install dependencies
 	$(info --> Install dependencies)
 	@( \
 		sudo apt update; \
-		sudo apt install python-pip python-apt; \
+		sudo apt install \
+			git \
+			python-apt \
+			python-pip \
+			terminator \
+			vim; \
 	)
 
 install: ## Install everything
