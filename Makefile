@@ -19,10 +19,12 @@ pre-install: ## Install dependencies
 			terminator \
 			vim; \
 	)
+	@make install-ansible
+	@make ansible-lint
 
 install: ## Install everything
 	$(info --> Install everything)
-	@make install-ansible
+	@make run-ansible
 
 venv: ## Create python virtualenv if not exists
 	[[ -d $(VIRTUALENV_DIR) ]] || virtualenv --system-site-packages $(VIRTUALENV_DIR)
