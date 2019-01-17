@@ -18,7 +18,7 @@ make pre-install
 # Usage
  - First, you need to install ansible with:
 ```
-make instal
+make install
 ```
  - Then you can run all ansible roles like this:
 ```
