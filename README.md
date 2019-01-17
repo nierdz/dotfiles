@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/nierdz/tools.svg?branch=master)](https://travis-ci.com/nierdz/tools)
+
 # My personal tools
  - It uses ansible in a virtualenv to deploy my personal tools
  - for now there is only some vim related stuffs
@@ -14,11 +16,15 @@ make pre-install
 ```
 
 # Usage
- - First, you need to install ansible with:
+ - Use `install` target to install everything:
 ```
-make instal
+make install
 ```
- - Then you can run all ansible roles like this:
+ - If you don't want to install everything, you can run a specific target:
 ```
 make run-ansible
+```
+ - To get all targets from `Makefile`, use `help`:
+```
+make help
 ```

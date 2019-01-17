@@ -4,6 +4,10 @@
   package:
     name: "git"
     state: present
+  register: git_installed
+  until: git_installed is success
+  retries: 10
+  delay: 2
 
 - name: Create Vim configuration directory
   file:
@@ -17,12 +21,12 @@
 
 - name: Clone Vundle repository
   git:
-    repo: "git@github.com:VundleVim/Vundle.vim.git"
+    repo: "https://github.com/VundleVim/Vundle.vim.git"
     dest: "~/.vim/bundle/Vundle.vim"
-    update: yes
-    force: yes
-    accept_hostkey: "no"
+    update: true
+    force: true
     version: "{{ vundle_version }}"
 
 - name: Install Vundle plugins
   command: "vim +PluginInstall +qall"
+  when: ansible_hostname != 'travis'

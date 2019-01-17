@@ -12,12 +12,19 @@ pre-install: ## Install dependencies
 	$(info --> Install dependencies)
 	@( \
 		sudo apt update; \
-		sudo apt install python-pip python-apt; \
+		sudo apt install \
+			git \
+			python-apt \
+			python-pip \
+			terminator \
+			vim; \
 	)
+	@make install-ansible
+	@make ansible-lint
 
 install: ## Install everything
 	$(info --> Install everything)
-	@make install-ansible
+	@make run-ansible
 
 venv: ## Create python virtualenv if not exists
 	[[ -d $(VIRTUALENV_DIR) ]] || virtualenv --system-site-packages $(VIRTUALENV_DIR)
@@ -36,4 +43,13 @@ run-ansible: ## Run ansible on full playbook
 	@( \
 		source $(VIRTUALENV_DIR)/bin/activate; \
 		ansible-playbook playbook.yml; \
+	)
+
+ansible-lint: ## Run ansible-lint on all roles
+	$(info --> Run ansible-lint on all roles)
+	@( \
+		source $(VIRTUALENV_DIR)/bin/activate; \
+		ansible-lint playbook.yml; \
+		ansible-playbook playbook.yml --syntax-check; \
+		yamllint -c .yamllint.yml .; \
 	)
