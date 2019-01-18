@@ -9,3 +9,10 @@
     owner: root
     group: root
   with_dict: "{{ binaries }}"
+
+- name: Install useful gems
+  gem:
+    name: "{{ item.key }}"
+    version: "{{ item.value }}"
+    state: present
+  with_dict: "{{ gems }}"

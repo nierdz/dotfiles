@@ -16,6 +16,7 @@ pre-install: ## Install dependencies
 			git \
 			python-apt \
 			python-pip \
+			ruby \
 			terminator \
 			vim; \
 	)
