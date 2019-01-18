@@ -1,0 +1,11 @@
+---
+
+- name: Install useful binaries
+  become: true
+  get_url:
+    url: "{{ item.value }}"
+    dest: "/usr/local/bin/{{ item.key }}"
+    mode: 0755
+    owner: root
+    group: root
+  with_dict: "{{ binaries }}"
