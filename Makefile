@@ -20,19 +20,19 @@ pre-install: ## Install dependencies
 			terminator \
 			vim; \
 	)
-	@make install-ansible
-	@make ansible-lint
+	@$(MAKE) install-ansible
+	@$(MAKE) ansible-lint
 
 install: ## Install everything
 	$(info --> Install everything)
-	@make run-ansible
+	@$(MAKE) run-ansible
 
 venv: ## Create python virtualenv if not exists
 	[[ -d $(VIRTUALENV_DIR) ]] || virtualenv --system-site-packages $(VIRTUALENV_DIR)
 
 install-ansible: ## Install ansible via pip
 	$(info --> Install ansible via `pip`)
-	@make venv
+	@$(MAKE) venv
 	@( \
 		source $(VIRTUALENV_DIR)/bin/activate; \
 		pip install --upgrade setuptools; \
