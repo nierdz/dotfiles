@@ -12,7 +12,7 @@ pre-install: ## Install dependencies
 	$(info --> Install dependencies)
 	@( \
 		sudo apt update; \
-		sudo apt install \
+		sudo apt install -y \
 			git \
 			python-apt \
 			python-pip \
