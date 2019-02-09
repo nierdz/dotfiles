@@ -16,6 +16,7 @@ pre-install: ## Install dependencies
 			git \
 			python-apt \
 			python-pip \
+			python-virtualenv \
 			ruby \
 			terminator \
 			vim; \
