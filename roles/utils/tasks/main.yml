@@ -68,3 +68,10 @@
     name: google-cloud-sdk={{ google_cloud_sdk_version }}
     state: present
     update_cache: true
+
+- name: Install kubectl
+  become: true
+  apt:
+    name: kubectl={{ kubectl_version }}
+    state: present
+    update_cache: true
