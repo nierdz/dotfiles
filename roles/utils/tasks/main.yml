@@ -21,3 +21,15 @@
   file:
     path: ~/.bashrc.d
     state: directory
+
+- name: Source all files in ~/.bashrc.d directory
+  blockinfile:
+    path: ~/.bashrc
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+    insertafter: EOF
+    block: |
+      for file in ~/.bashrc.d/*; do
+        if [ -r $file ]; then
+          . $file
+        fi
+      done
