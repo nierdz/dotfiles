@@ -48,6 +48,12 @@
     dest: ~/.bashrc.d/bash-git-prompt
     mode: 0755
 
+- name: Add terminator configuration file for title bar
+  template:
+    src: terminator.j2
+    dest: ~/.bashrc.d/terminator
+    mode: 0755
+
 - name: Add gcloud sdk apt-key
   become: true
   apt_key:
