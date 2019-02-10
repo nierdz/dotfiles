@@ -54,6 +54,12 @@
     dest: ~/.bashrc.d/terminator
     mode: 0755
 
+- name: Add better history configuration
+  template:
+    src: history.j2
+    dest: ~/.bashrc.d/history
+    mode: 0755
+
 - name: Add gcloud sdk apt-key
   become: true
   apt_key:
