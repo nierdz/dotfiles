@@ -16,3 +16,8 @@
     version: "{{ item.value }}"
     state: present
   with_dict: "{{ gems }}"
+
+- name: Create ~/.bashrc.d directory
+  file:
+    path: ~/.bashrc.d
+    state: directory
