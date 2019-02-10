@@ -60,11 +60,11 @@
     repo: "deb http://packages.cloud.google.com/apt cloud-sdk-{{ ansible_lsb.codename }} main"
     state: present
     filename: google-cloud-sdk
-    update_cache: yes
+    update_cache: true
 
 - name: Install gcloud sdk
   become: true
   apt:
     name: google-cloud-sdk={{ google_cloud_sdk_version }}
     state: present
-    update_cache: yes
+    update_cache: true
