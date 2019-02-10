@@ -47,3 +47,24 @@
     src: bash-git-prompt.j2
     dest: ~/.bashrc.d/bash-git-prompt
     mode: 0755
+
+- name: Add gcloud sdk apt-key
+  become: true
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+- name: Add gcloud sdk repository
+  become: true
+  apt_repository:
+    repo: "deb http://packages.cloud.google.com/apt cloud-sdk-{{ ansible_lsb.codename }} main"
+    state: present
+    filename: google-cloud-sdk
+    update_cache: yes
+
+- name: Install gcloud sdk
+  become: true
+  apt:
+    name: google-cloud-sdk
+    state: present
+    update_cache: yes
