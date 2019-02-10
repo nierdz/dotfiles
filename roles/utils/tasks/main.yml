@@ -73,7 +73,8 @@
   become: true
   apt:
     name:
-      - kubectl={{ kubectl_version }}
       - golang
+      - kubectl={{ kubectl_version }}
+      - terminator
     state: present
     update_cache: true
