@@ -65,6 +65,6 @@
 - name: Install gcloud sdk
   become: true
   apt:
-    name: google-cloud-sdk
+    name: google-cloud-sdk={{ google_cloud_sdk_version }}
     state: present
     update_cache: yes
