@@ -28,5 +28,5 @@
     version: "{{ vundle_version }}"
 
 - name: Install Vundle plugins
-  command: "vim +PluginInstall +qall"
+  command: 'vim -E -s -c "source ~/.vimrc" -c PluginInstall -c qa'
   when: ansible_hostname != 'travis'

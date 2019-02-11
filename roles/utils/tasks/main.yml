@@ -16,3 +16,104 @@
     version: "{{ item.value }}"
     state: present
   with_dict: "{{ gems }}"
+
+- name: Create ~/.bashrc.d directory
+  file:
+    path: ~/.bashrc.d
+    state: directory
+
+- name: Source all files in ~/.bashrc.d directory
+  blockinfile:
+    path: ~/.bashrc
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+    insertafter: EOF
+    block: |
+      for file in ~/.bashrc.d/*; do
+        if [ -r $file ]; then
+          . $file
+        fi
+      done
+
+- name: Clone bash-git-prompt repository
+  git:
+    repo: "https://github.com/magicmonty/bash-git-prompt.git"
+    dest: "~/.bash-git-prompt"
+    update: true
+    force: true
+    depth: 1
+  tags:
+    - skip_ansible_lint
+
+- name: Add bash-git-prompt configuration file
+  template:
+    src: bash-git-prompt.j2
+    dest: ~/.bashrc.d/bash-git-prompt
+    mode: 0755
+
+- name: Add terminator configuration file for title bar
+  template:
+    src: terminator.j2
+    dest: ~/.bashrc.d/terminator
+    mode: 0755
+
+- name: Add better history configuration
+  template:
+    src: history.j2
+    dest: ~/.bashrc.d/history
+    mode: 0755
+
+- name: Add gcloud sdk apt-key
+  become: true
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+  register: gcloud_key_installed
+  until: gcloud_key_installed is success
+  retries: 10
+  delay: 2
+
+- name: Add gcloud sdk repository
+  become: true
+  apt_repository:
+    repo: "deb http://packages.cloud.google.com/apt cloud-sdk-{{ ansible_lsb.codename }} main"
+    state: present
+    filename: google-cloud-sdk
+    update_cache: true
+
+- name: Install gcloud sdk
+  become: true
+  apt:
+    name: google-cloud-sdk={{ google_cloud_sdk_version }}
+    state: present
+    update_cache: true
+  register: gcloud_installed
+  until: gcloud_installed is success
+  retries: 10
+  delay: 2
+
+- name: Install some useful packages
+  become: true
+  apt:
+    name:
+      - golang
+      - htop
+      - kubectl={{ kubectl_version }}
+      - netcat
+      - strace
+      - terminator
+      - tig
+    state: present
+    update_cache: true
+  register: packages_installed
+  until: packages_installed is success
+  retries: 10
+  delay: 2
+
+- name: Install evil chrome
+  become: true
+  apt:
+    deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  register: chrome_installed
+  until: chrome_installed is success
+  retries: 10
+  delay: 2
