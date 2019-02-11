@@ -117,3 +117,33 @@
   until: chrome_installed is success
   retries: 10
   delay: 2
+
+- name: Add spotify apt-key
+  become: true
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
+    state: present
+  register: spotify_key_installed
+  until: spotify_key_installed is success
+  retries: 10
+  delay: 2
+
+- name: Add spotify repository
+  become: true
+  apt_repository:
+    repo: "deb http://repository.spotify.com stable non-free"
+    state: present
+    filename: spotify
+    update_cache: true
+
+- name: Install spotify
+  become: true
+  apt:
+    name: spotify-client
+    state: present
+    update_cache: true
+  register: spotify_installed
+  until: spotify_installed is success
+  retries: 10
+  delay: 2
