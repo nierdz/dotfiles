@@ -91,7 +91,7 @@
   retries: 10
   delay: 2
 
-- name: Install some useful binaries
+- name: Install some useful packages
   become: true
   apt:
     name:
@@ -104,8 +104,8 @@
       - tig
     state: present
     update_cache: true
-  register: binaries_installed
-  until: binaries_installed is success
+  register: packages_installed
+  until: packages_installed is success
   retries: 10
   delay: 2
 
