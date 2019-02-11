@@ -96,8 +96,12 @@
   apt:
     name:
       - golang
+      - htop
       - kubectl={{ kubectl_version }}
+      - netcat
+      - strace
       - terminator
+      - tig
     state: present
     update_cache: true
   register: binaries_installed
