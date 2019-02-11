@@ -104,3 +104,12 @@
   until: binaries_installed is success
   retries: 10
   delay: 2
+
+- name: Install evil chrome
+  become: true
+  apt:
+    deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  register: chrome_installed
+  until: chrome_installed is success
+  retries: 10
+  delay: 2
