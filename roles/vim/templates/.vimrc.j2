@@ -12,6 +12,12 @@ syntax on                     " let vim works, not my brain
 set incsearch                 " search fucking right now !
 set hlsearch                  " and give me some yellow !
 
+" tabs, spaces and indeting
+set expandtab                 " use spaces when press tab
+set tabstop=2                 " define 2 spaces for 1 tab useful for :retab for example
+set softtabstop=2             " use 2 spaces when press tab
+set shiftwidth=2              " 2 spaces for indentation
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
