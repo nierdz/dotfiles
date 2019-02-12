@@ -62,6 +62,18 @@
     dest: ~/.bashrc.d/history
     mode: 0755
 
+- name: Add golang configuration
+  template:
+    src: golang.j2
+    dest: ~/.bashrc.d/golang
+    mode: 0755
+
+- name: Create golang directory
+  file:
+    path: "~/go"
+    state: directory
+    mode: 0755
+
 - name: Add gcloud sdk apt-key
   become: true
   apt_key:
