@@ -1,12 +1,16 @@
 " {{ ansible_managed }}
-set nocompatible              " be iMproved, required
-filetype off                  " required
-set background=dark
-let base16colorspace=256
-set termguicolors
-set incsearch
-set hlsearch
-syntax on
+
+" general
+set nocompatible              " be iMproved, required for vundle
+filetype off                  " required for vundle
+set background=dark           " 1337 :)
+let base16colorspace=256      " better than 16
+set termguicolors             " cause it's better with colors
+syntax on                     " let vim works, not my brain
+
+" search
+set incsearch                 " search fucking right now !
+set hlsearch                  " and give me some yellow !
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
