@@ -159,3 +159,14 @@
   until: spotify_installed is success
   retries: 10
   delay: 2
+
+- name: Install useful packages
+  become: true
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: true
+  register: packages_installed
+  until: packages_installed is success
+  retries: 10
+  delay: 2
