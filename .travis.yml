@@ -1,7 +1,7 @@
 ---
 sudo: required
 language: generic
-distro: xenial
+dist: xenial
 addons:
   hostname: travis
 
