@@ -91,6 +91,8 @@
     state: present
     filename: google-cloud-sdk
     update_cache: true
+  notify:
+    - apt update
 
 - name: Install gcloud sdk
   become: true
@@ -148,6 +150,8 @@
     state: present
     filename: spotify
     update_cache: true
+  notify:
+    - apt update
 
 - name: Install spotify
   become: true
