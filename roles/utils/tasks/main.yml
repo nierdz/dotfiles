@@ -195,6 +195,7 @@
   until: nextcloud_packages_installed is success
   retries: 10
   delay: 2
+  when: ansible_hostname != 'travis'
 
 - name: Install useful packages
   become: true
