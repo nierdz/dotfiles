@@ -178,7 +178,7 @@
 - name: Add nextcloud repo
   become: true
   apt_repository:
-    repo: "deb http://ppa.launchpad.net/nextcloud-devs/client/ubuntu cosmic main"
+    repo: "deb http://ppa.launchpad.net/nextcloud-devs/client/ubuntu {{ nextcloud_release }} main"
     filename: nextcloud-client
     state: present
   notify:
