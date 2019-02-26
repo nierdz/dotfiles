@@ -3,7 +3,7 @@
 # My personal tools
  - It uses ansible in a virtualenv to deploy my personal tools:
   - vim with vundle plugins
-  - [bash-git-prompt!](https://github.com/magicmonty/bash-git-prompt)
+  - [bash-git-prompt](https://github.com/magicmonty/bash-git-prompt)
   - a bunch of binaries like docker-compose, helm, stern, etc.
   - a bunch of useful packages
 
