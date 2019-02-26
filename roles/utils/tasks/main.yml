@@ -179,6 +179,7 @@
   become: true
   apt_repository:
     repo: "deb http://ppa.launchpad.net/nextcloud-devs/client/ubuntu cosmic main"
+    filename: nextcloud-client
     state: present
   notify:
     - apt update
