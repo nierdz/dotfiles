@@ -16,3 +16,6 @@ kubectl_version: "1.13.3-00"
 
 packages:
   - net-tools
+nextcloud_packages:
+  - nextcloud-client
+  - nextcloud-client-nautilus
