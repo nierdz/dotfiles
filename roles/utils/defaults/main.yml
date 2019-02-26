@@ -15,8 +15,43 @@ google_cloud_sdk_version: "235.0.0-0"
 kubectl_version: "1.13.3-00"
 
 packages:
+  - ack
+  - aspell-en
+  - aspell-fr
+  - bash-completion
+  - build-essential
+  - ccze
+  - dnsutils
+  - evince
+  - file-roller
+  - filezilla
+  - firefox
+  - firmware-linux-free
+  - firmware-linux-nonfree
+  - gdm3
+  - gnome-shell
+  - htop
+  - keepassx
+  - libreoffice-calc
+  - libreoffice-writer
+  - lsb-release
+  - lsof
   - net-tools
+  - netcat
+  - numix-gtk-theme
+  - numix-icon-theme
+  - rsync
+  - siege
+  - simple-scan
+  - strace
+  - subversion
   - tcpdump
+  - telnet
+  - thunderbird
+  - traceroute
+  - vlc
+  - wget
+  - whois
 
 nextcloud_packages:
   - nextcloud-client

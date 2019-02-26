@@ -229,3 +229,4 @@
   until: packages_installed is success
   retries: 10
   delay: 2
+  when: ansible_hostname != 'travis'
