@@ -18,7 +18,8 @@ pre-install: ## Install dependencies
 			python-pip \
 			python-virtualenv \
 			ruby \
-			vim; \
+			vim \
+			terminator; \
 	)
 	@$(MAKE) install-ansible
 	@$(MAKE) ansible-lint

@@ -136,7 +136,6 @@
       - kubectl={{ kubectl_version }}
       - netcat
       - strace
-      - terminator
       - tig
     state: present
     update_cache: true
