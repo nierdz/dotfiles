@@ -1,5 +1,39 @@
 ---
 
+- name: Configure /etc/apt/preferences
+  become: true
+  template:
+    src: etc/apt/preferences.j2
+    dest: /etc/apt/preferences
+    mode: 0644
+    owner: root
+    group: root
+  notify:
+    - apt update
+
+- name: Configure /etc/apt/sources.list
+  become: true
+  template:
+    src: etc/apt/sources.list.j2
+    dest: /etc/apt/sources.list
+    mode: 0644
+    owner: root
+    group: root
+  notify:
+    - apt update
+
+- name: Install useful packages
+  become: true
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: true
+  register: packages_installed
+  until: packages_installed is success
+  retries: 10
+  delay: 2
+  when: ansible_hostname != 'travis'
+
 - name: Install useful binaries
   become: true
   get_url:
@@ -105,17 +139,10 @@
   retries: 10
   delay: 2
 
-- name: Install some useful packages
+- name: Install kubectl
   become: true
   apt:
-    name:
-      - golang
-      - htop
-      - kubectl={{ kubectl_version }}
-      - netcat
-      - strace
-      - terminator
-      - tig
+    name: kubectl={{ kubectl_version }}
     state: present
     update_cache: true
   register: packages_installed
@@ -196,14 +223,3 @@
   retries: 10
   delay: 2
   when: ansible_hostname != 'travis'
-
-- name: Install useful packages
-  become: true
-  apt:
-    name: "{{ packages }}"
-    state: present
-    update_cache: true
-  register: packages_installed
-  until: packages_installed is success
-  retries: 10
-  delay: 2
