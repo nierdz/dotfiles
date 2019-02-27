@@ -139,16 +139,10 @@
   retries: 10
   delay: 2
 
-- name: Install some useful packages
+- name: Install kubectl
   become: true
   apt:
-    name:
-      - golang
-      - htop
-      - kubectl={{ kubectl_version }}
-      - netcat
-      - strace
-      - tig
+    name: kubectl={{ kubectl_version }}
     state: present
     update_cache: true
   register: packages_installed

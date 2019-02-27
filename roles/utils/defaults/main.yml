@@ -30,6 +30,7 @@ packages:
   - firmware-linux-nonfree
   - gdm3
   - gnome-shell
+  - golang
   - htop
   - keepassx
   - libreoffice-calc
@@ -50,6 +51,7 @@ packages:
   - tcpdump
   - telnet
   - thunderbird
+  - tig
   - traceroute
   - vlc
   - wget
