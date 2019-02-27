@@ -22,6 +22,18 @@
   notify:
     - apt update
 
+- name: Install useful packages
+  become: true
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: true
+  register: packages_installed
+  until: packages_installed is success
+  retries: 10
+  delay: 2
+  when: ansible_hostname != 'travis'
+
 - name: Install useful binaries
   become: true
   get_url:
@@ -214,18 +226,6 @@
     default_release: cosmic
   register: nextcloud_packages_installed
   until: nextcloud_packages_installed is success
-  retries: 10
-  delay: 2
-  when: ansible_hostname != 'travis'
-
-- name: Install useful packages
-  become: true
-  apt:
-    name: "{{ packages }}"
-    state: present
-    update_cache: true
-  register: packages_installed
-  until: packages_installed is success
   retries: 10
   delay: 2
   when: ansible_hostname != 'travis'
