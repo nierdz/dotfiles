@@ -14,6 +14,8 @@ pre-install: ## Install dependencies
 		sudo apt update; \
 		sudo apt install -y \
 			git \
+			gnome \
+			keepassx \
 			python-apt \
 			python-pip \
 			python-virtualenv \
