@@ -21,6 +21,7 @@ packages:
   - bash-completion
   - build-essential
   - ccze
+  - curl
   - dnsutils
   - evince
   - file-roller
