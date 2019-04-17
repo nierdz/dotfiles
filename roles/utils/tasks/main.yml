@@ -238,3 +238,9 @@
   retries: 10
   delay: 2
   when: ansible_hostname != 'travis'
+
+- name: Configure ssh client
+  template:
+    src: .ssh/config.j2
+    dest: ~/.ssh/config
+    mode: 0600
