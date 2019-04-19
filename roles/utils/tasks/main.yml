@@ -239,6 +239,40 @@
   delay: 2
   when: ansible_hostname != 'travis'
 
+- name: Add docker apt-key
+  become: true
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+  register: docker_key_installed
+  until: docker_key_installed is success
+  retries: 10
+  delay: 2
+
+- name: Add docker repository
+  become: true
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_lsb.codename }} stable"
+    state: present
+    filename: docker
+    update_cache: true
+  notify:
+    - apt update
+
+- name: Install docker
+  become: true
+  apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+    state: present
+    update_cache: true
+  register: docker_installed
+  until: docker_installed is success
+  retries: 10
+  delay: 2
+
 - name: Configure ssh client
   template:
     src: .ssh/config.j2
