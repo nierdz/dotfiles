@@ -273,6 +273,13 @@
   retries: 10
   delay: 2
 
+- name: Add {{ lookup('env','USER') }} to group docker
+  become: true
+  user:
+    name: "{{ lookup('env','USER') }}"
+    groups: docker
+    append: true
+
 - name: Configure ssh client
   template:
     src: .ssh/config.j2
