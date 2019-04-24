@@ -31,6 +31,7 @@ packages:
   - firmware-linux-nonfree
   - gdm3
   - gnome-shell
+  - gnome-tweak-tool
   - golang
   - htop
   - keepassx
