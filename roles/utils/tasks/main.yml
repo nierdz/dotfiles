@@ -258,6 +258,7 @@
     update_cache: true
   notify:
     - apt update
+  when: ansible_hostname != 'travis'
 
 - name: Install docker
   become: true
@@ -272,6 +273,7 @@
   until: docker_installed is success
   retries: 10
   delay: 2
+  when: ansible_hostname != 'travis'
 
 - name: Add {{ lookup('env','USER') }} to group docker
   become: true
