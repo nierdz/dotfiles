@@ -258,6 +258,7 @@
     update_cache: true
   notify:
     - apt update
+  when: ansible_hostname != 'travis'
 
 - name: Install docker
   become: true
