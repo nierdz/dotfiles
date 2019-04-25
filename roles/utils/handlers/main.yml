@@ -7,3 +7,9 @@
   until: cache_updated is success
   retries: 10
   delay: 2
+
+- name: NetworkManager restart
+  become: true
+  systemd:
+    name: NetworkManager
+    state: restarted

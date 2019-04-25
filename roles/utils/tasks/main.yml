@@ -287,3 +287,12 @@
     src: .ssh/config.j2
     dest: ~/.ssh/config
     mode: 0600
+
+- name: Configure NetworkManager to handle ethernet card
+  become: true
+  replace:
+    path: /etc/NetworkManager/NetworkManager.conf
+    regexp: '^\[ifupdown\]\nmanaged=[a-z]*$'
+    replace: '[ifupdown]\nmanaged=true'
+  notify:
+    - NetworkManager restart
