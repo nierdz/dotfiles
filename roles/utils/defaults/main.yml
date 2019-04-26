@@ -46,6 +46,7 @@ packages:
   - pepperflashplugin-nonfree
   - rhythmbox
   - rsync
+  - shellcheck
   - siege
   - simple-scan
   - strace
