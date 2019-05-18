@@ -54,6 +54,7 @@
   get_url:
     url: "{{ item.value }}"
     dest: "/usr/local/bin/{{ item.key }}"
+    force: true
     mode: 0755
     owner: root
     group: root
