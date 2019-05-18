@@ -1,7 +1,7 @@
 ---
 
 binaries:
-  docker-compose: "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-Linux-x86_64"
+  docker-compose: "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-Linux-x86_64"
   hadolint: "https://github.com/hadolint/hadolint/releases/download/v1.15.0/hadolint-Linux-x86_64"
   helm: "https://storage.googleapis.com/kubernetes-helm/helm-v2.12.2-linux-amd64.tar.gz"
   jl: "https://github.com/koenbollen/jl/releases/download/v1.1.1/jl_linux_amd64"
