@@ -60,6 +60,30 @@
     group: root
   with_dict: "{{ binaries }}"
 
+- name: Check Terraform version
+  shell: |
+    set -o pipefail
+    terraform --version | head -n1 | grep {{ terraform_version }}
+  failed_when: false
+  changed_when: false
+  register: current_terraform_version
+
+- name: Download Terraform if needed
+  become: true
+  get_url:
+    url: "https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip"
+    dest: "/usr/local/src/terraform_{{ terraform_version }}_linux_amd64.zip"
+  register: terraform_downloaded
+  when: current_terraform_version != terraform_version
+
+- name: Extract and install Terraform if needed
+  become: true
+  unarchive:
+    src: "/usr/local/src/terraform_{{ terraform_version }}_linux_amd64.zip"
+    dest: /usr/local/bin
+    copy: false
+  when: terraform_downloaded is changed
+
 - name: Install useful gems
   gem:
     name: "{{ item.key }}"
