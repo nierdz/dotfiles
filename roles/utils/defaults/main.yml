@@ -8,6 +8,7 @@ binaries:
   stern: "https://github.com/wercker/stern/releases/download/1.10.0/stern_linux_amd64"
 
 terraform_version: 0.11.14
+dive_version: 0.7.2
 
 gems:
   rake: "12.3.2"
