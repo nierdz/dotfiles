@@ -30,3 +30,4 @@
 - name: Install Vundle plugins
   command: 'vim -E -s -c "source ~/.vimrc" -c PluginInstall -c qa'
   when: ansible_hostname != 'travis'
+  changed_when: false
