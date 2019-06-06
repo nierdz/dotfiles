@@ -7,7 +7,7 @@ binaries:
   jl: "https://github.com/koenbollen/jl/releases/download/v1.1.1/jl_linux_amd64"
   stern: "https://github.com/wercker/stern/releases/download/1.10.0/stern_linux_amd64"
 
-terraform_version: 0.11.14
+terraform_version: 0.12.1
 dive_version: 0.7.2
 
 gems:
