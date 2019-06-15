@@ -99,6 +99,7 @@
 - name: Source all files in ~/.bashrc.d directory
   blockinfile:
     path: ~/.bashrc
+    marker: "# {mark} ANSIBLE MANAGED BLOCK Source ~/.bashrc.d directory"
     insertafter: EOF
     block: |
       for file in ~/.bashrc.d/*; do
