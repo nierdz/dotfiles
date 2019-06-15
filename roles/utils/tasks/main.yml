@@ -331,3 +331,12 @@
     replace: '[ifupdown]\nmanaged=true'
   notify:
     - NetworkManager restart
+
+- name: Add autocompletion for terraform and packer
+  blockinfile:
+    path: ~/.bashrc
+    marker: "# {mark} ANSIBLE MANAGED BLOCK Terraform & Packer"
+    insertafter: EOF
+    block: |
+      complete -C /usr/local/bin/terraform terraform
+      complete -C /usr/local/bin/packer packer
