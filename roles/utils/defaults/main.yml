@@ -15,7 +15,7 @@ gems:
   serverspec: "2.41.3"
 
 google_cloud_sdk_version: "252.0.0-0"
-kubectl_version: "1.14.3-00"
+kubectl_version: "1.15.0-00"
 
 packages:
   - ack
