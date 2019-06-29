@@ -1,0 +1,9 @@
+# {{ ansible_managed }}
+
+function gcpconf {
+    gcloud config configurations list | grep -E --color=auto '.*True.*|$'
+}
+
+function gcplist {
+  gcloud compute instances list
+}
