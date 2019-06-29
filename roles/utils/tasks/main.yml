@@ -338,11 +338,12 @@
   notify:
     - NetworkManager restart
 
-- name: Add autocompletion for terraform and packer
+- name: Add autocompletion for terraform, packer and travis
   blockinfile:
     path: ~/.bashrc
-    marker: "# {mark} ANSIBLE MANAGED BLOCK Terraform & Packer"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK Autocompletion"
     insertafter: EOF
     block: |
       complete -C /usr/local/bin/terraform terraform
       complete -C /usr/local/bin/packer packer
+      [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
