@@ -3,7 +3,7 @@
 binaries:
   docker-compose: "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-Linux-x86_64"
   hadolint: "https://github.com/hadolint/hadolint/releases/download/v1.17.1/hadolint-Linux-x86_64"
-  jl: "https://github.com/koenbollen/jl/releases/download/v1.1.1/jl_linux_amd64"
+  jl: "https://github.com/koenbollen/jl/releases/download/v1.1.2/jl_linux_amd64"
   stern: "https://github.com/wercker/stern/releases/download/1.10.0/stern_linux_amd64"
 
 helm_version: v2.14.1
