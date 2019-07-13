@@ -175,6 +175,12 @@
     dest: ~/.bashrc.d/gcloud
     mode: 0755
 
+- name: Add some aliases
+  template:
+    src: aliases.j2
+    dest: ~/.bashrc.d/aliases
+    mode: 0755
+
 - name: Create golang directory
   file:
     path: "~/go"
