@@ -1,5 +1,4 @@
 ---
-
 - name: Configure /etc/apt/preferences
   become: true
   template:
