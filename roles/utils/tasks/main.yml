@@ -374,3 +374,8 @@
       complete -C /usr/local/bin/terraform terraform
       complete -C /usr/local/bin/packer packer
       [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
+
+- name: Install molecule
+  pip:
+    name: molecule
+    version: 2.20.1
