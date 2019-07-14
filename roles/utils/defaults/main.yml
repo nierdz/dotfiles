@@ -38,6 +38,7 @@ packages:
   - golang
   - htop
   - iptraf
+  - jq
   - keepassx
   - libreoffice-calc
   - libreoffice-writer
@@ -60,6 +61,7 @@ packages:
   - thunderbird
   - tig
   - traceroute
+  - tree
   - vlc
   - wget
   - whois
