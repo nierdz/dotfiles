@@ -49,6 +49,7 @@ packages:
   - numix-gtk-theme
   - numix-icon-theme
   - pepperflashplugin-nonfree
+  - python-docker
   - rhythmbox
   - rsync
   - shellcheck
