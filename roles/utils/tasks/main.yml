@@ -247,15 +247,6 @@
   retries: 10
   delay: 2
 
-- name: Install hugo
-  become: true
-  apt:
-    deb: https://github.com/gohugoio/hugo/releases/download/v{{ hugo_version }}/hugo_{{ hugo_version }}_Linux-64bit.deb
-  register: hugo_installed
-  until: hugo_installed is success
-  retries: 10
-  delay: 2
-
 - name: Add spotify apt-key
   become: true
   apt_key:
