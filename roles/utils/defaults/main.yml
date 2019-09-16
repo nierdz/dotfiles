@@ -70,4 +70,4 @@ packages:
 nextcloud_packages:
   - nextcloud-client
   - nextcloud-client-nautilus
-nextcloud_release: cosmic
+nextcloud_release: disco
