@@ -46,7 +46,6 @@
   until: packages_installed is success
   retries: 10
   delay: 2
-  when: ansible_hostname != 'travis'
 
 - name: Install useful binaries
   become: true
@@ -278,7 +277,6 @@
   until: spotify_installed is success
   retries: 10
   delay: 2
-  when: ansible_hostname != 'travis'
 
 - name: Add nextcloud apt key
   become: true
@@ -311,7 +309,6 @@
   until: nextcloud_packages_installed is success
   retries: 10
   delay: 2
-  when: ansible_hostname != 'travis'
 
 - name: Add docker apt-key
   become: true
@@ -332,7 +329,6 @@
     update_cache: true
   notify:
     - apt update
-  when: ansible_hostname != 'travis'
 
 - name: Install docker
   become: true
@@ -347,7 +343,6 @@
   until: docker_installed is success
   retries: 10
   delay: 2
-  when: ansible_hostname != 'travis'
 
 - name: Add {{ lookup('env','USER') }} to group docker
   become: true
