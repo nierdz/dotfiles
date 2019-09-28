@@ -1,12 +1,12 @@
 ---
-sudo: required
 language: generic
-dist: xenial
-addons:
-  hostname: travis
 
 before_install:
-  - make pre-install
+  - sudo apt-get install -y
+      python-apt
+      python-pip
+      python-virtualenv
+  - make install-ansible
 
 script:
-  - make install
+  - make ansible-lint
