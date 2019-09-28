@@ -7,3 +7,4 @@
     - { role: vim, tags: ['vim'] }
     - { role: vundle, tags: ['vundle'] }
     - { role: base16, tags: ['base16'] }
+    - { role: php, tags: ['php'] }

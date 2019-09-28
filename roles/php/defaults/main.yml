@@ -1,0 +1,4 @@
+---
+php_executable: /usr/bin/php
+composer_path: /usr/local/bin/composer
+composer_release: '1.9.0'

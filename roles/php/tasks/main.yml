@@ -1,0 +1,31 @@
+---
+- name: Install php-cli package
+  become: true
+  apt:
+    name: php-cli
+
+- name: Check if composer binary exists
+  stat:
+    path: "{{ composer_path }}"
+  register: composer_bin
+  changed_when: false
+
+- name: Check composer version if already installed # noqa 306
+  shell: |
+    "{{ composer_path }}" --version \
+    | cut -d " " -f3
+  register: composer_version
+  changed_when: false
+  when: composer_bin is defined
+
+- name: Download Composer if release changed or composer was never installed
+  become: true
+  get_url:
+    url: https://getcomposer.org/download/{{ composer_release }}/composer.phar
+    dest: /usr/local/bin/composer
+    force: true
+    owner: root
+    group: root
+    mode: 0755
+  when: (composer_version.stdout.find(composer_release) != 0) or
+        (not composer_bin.stat.exists)
