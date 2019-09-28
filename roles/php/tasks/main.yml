@@ -1,8 +1,8 @@
 ---
-- name: Install php-cli package
+- name: Install php packages
   become: true
   apt:
-    name: php-cli
+    name: "{{ php_packages }}"
 
 - name: Check if composer binary exists
   stat:
@@ -29,3 +29,11 @@
     mode: 0755
   when: (composer_version.stdout.find(composer_release) != 0) or
         (not composer_bin.stat.exists)
+
+- name: Install global composer packages
+  composer:
+    global_command: true
+    no_dev: true
+    command: require
+    arguments: "{{ item }}"
+  with_items: "{{ composer_global_packages }}"
