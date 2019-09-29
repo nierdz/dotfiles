@@ -24,7 +24,7 @@ pre-install: ## Install dependencies
 			terminator; \
 	)
 	@$(MAKE) install-ansible
-	@$(MAKE) ansible-lint
+	@$(MAKE) tests
 
 install: ## Install everything
 	$(info --> Install everything)
@@ -49,8 +49,8 @@ run-ansible: ## Run ansible on full playbook
 		ansible-playbook playbook.yml; \
 	)
 
-ansible-lint: ## Run ansible-lint on all roles
-	$(info --> Run ansible-lint on all roles)
+tests: ## Run all tests
+	$(info --> Run all tests)
 	@( \
 		source $(VIRTUALENV_DIR)/bin/activate; \
 		ansible-lint playbook.yml; \

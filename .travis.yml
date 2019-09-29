@@ -9,4 +9,4 @@ before_install:
   - make install-ansible
 
 script:
-  - make ansible-lint
+  - make tests
