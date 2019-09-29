@@ -56,4 +56,5 @@ tests: ## Run all tests
 		ansible-lint playbook.yml; \
 		ansible-playbook playbook.yml --syntax-check; \
 		yamllint -c .yamllint.yml .; \
+		pre-commit run --all-files; \
 	)
