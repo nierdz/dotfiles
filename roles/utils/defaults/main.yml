@@ -17,6 +17,11 @@ gems:
 google_cloud_sdk_version: "264.0.0-0"
 kubectl_version: "1.16.0-00"
 
+pip_packages:
+  - molecule==2.22
+  - pre-commit==1.18.3
+
+
 packages:
   - ack
   - aspell-en
