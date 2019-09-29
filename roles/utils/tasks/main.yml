@@ -199,7 +199,7 @@
 - name: Add gcloud sdk repository
   become: true
   apt_repository:
-    repo: "deb http://packages.cloud.google.com/apt cloud-sdk-{{ ansible_lsb.codename }} main"
+    repo: "deb http://packages.cloud.google.com/apt cloud-sdk-buster main"
     state: present
     filename: google-cloud-sdk
     update_cache: true
