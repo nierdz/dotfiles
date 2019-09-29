@@ -323,7 +323,7 @@
 - name: Add docker repository
   become: true
   apt_repository:
-    repo: "deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_lsb.codename }} stable"
+    repo: "deb [arch=amd64] https://download.docker.com/linux/debian buster stable"
     state: present
     filename: docker
     update_cache: true
