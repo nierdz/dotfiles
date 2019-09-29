@@ -199,7 +199,7 @@
 - name: Add gcloud sdk repository
   become: true
   apt_repository:
-    repo: "deb http://packages.cloud.google.com/apt cloud-sdk-{{ ansible_lsb.codename }} main"
+    repo: "deb http://packages.cloud.google.com/apt cloud-sdk-buster main"
     state: present
     filename: google-cloud-sdk
     update_cache: true
@@ -323,7 +323,7 @@
 - name: Add docker repository
   become: true
   apt_repository:
-    repo: "deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_lsb.codename }} stable"
+    repo: "deb [arch=amd64] https://download.docker.com/linux/debian buster stable"
     state: present
     filename: docker
     update_cache: true
@@ -376,7 +376,6 @@
       complete -C /usr/local/bin/packer packer
       [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 
-- name: Install molecule
+- name: Install pip packages
   pip:
-    name: molecule
-    version: 2.20.1
+    name: "{{ pip_packages }}"
