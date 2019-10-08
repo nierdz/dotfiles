@@ -14,7 +14,7 @@ gems:
   rake: "12.3.2"
   serverspec: "2.41.3"
 
-google_cloud_sdk_version: "264.0.0-0"
+google_cloud_sdk_version: "266.0.0-0"
 kubectl_version: "1.16.1-00"
 
 pip_packages:
