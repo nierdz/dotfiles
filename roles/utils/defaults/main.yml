@@ -51,6 +51,7 @@ packages:
   - lsof
   - net-tools
   - netcat
+  - nextcloud-desktop
   - numix-gtk-theme
   - numix-icon-theme
   - pepperflashplugin-nonfree
@@ -71,8 +72,3 @@ packages:
   - vlc
   - wget
   - whois
-
-nextcloud_packages:
-  - nextcloud-client
-  - nextcloud-client-nautilus
-nextcloud_release: disco

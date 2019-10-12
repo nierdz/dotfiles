@@ -278,38 +278,6 @@
   retries: 10
   delay: 2
 
-- name: Add nextcloud apt key
-  become: true
-  apt_key:
-    keyserver: keyserver.ubuntu.com
-    id: 1FCD77DD0DBEF5699AD2610160EE47FBAD3DD469
-    state: present
-  register: nextcloud_key_installed
-  until: nextcloud_key_installed is success
-  retries: 10
-  delay: 2
-
-- name: Add nextcloud repo
-  become: true
-  apt_repository:
-    repo: "deb http://ppa.launchpad.net/nextcloud-devs/client/ubuntu {{ nextcloud_release }} main"
-    filename: nextcloud-client
-    state: present
-  notify:
-    - apt update
-
-- name: Install nextcloud packages
-  become: true
-  apt:
-    name: "{{ nextcloud_packages }}"
-    state: present
-    update_cache: true
-    default_release: cosmic
-  register: nextcloud_packages_installed
-  until: nextcloud_packages_installed is success
-  retries: 10
-  delay: 2
-
 - name: Add docker apt-key
   become: true
   apt_key:
