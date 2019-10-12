@@ -249,8 +249,7 @@
 - name: Add spotify apt-key
   become: true
   apt_key:
-    keyserver: keyserver.ubuntu.com
-    id: 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
+    url: https://download.spotify.com/debian/pubkey.gpg
     state: present
   register: spotify_key_installed
   until: spotify_key_installed is success
