@@ -1,4 +1,11 @@
 ---
+- name: Use vim as default editor
+  become: true
+  alternatives:
+    name: editor
+    path: /usr/libexec/vim/vim.basic
+  changed_when: false
+
 - name: Create .vimrc configuration file
   template:
     src: .vimrc.j2
