@@ -346,3 +346,8 @@
 - name: Install pip packages
   pip:
     name: "{{ pip_packages }}"
+
+- name: Create ~/.yamllint.yml configuration file
+  template:
+    src: .yamllint.yml.j2
+    dest: ~/.yamllint.yml

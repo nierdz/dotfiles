@@ -19,11 +19,6 @@
     replace: '"  set mouse=a'
   ignore_errors: true
 
-- name: Create ~/.yamllint.yml configuration file
-  template:
-    src: .yamllint.yml.j2
-    dest: ~/.yamllint.yml
-
 - name: Create Vim configuration directory
   file:
     path: "~/.vim"
