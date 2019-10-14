@@ -8,7 +8,7 @@ binaries:
 
 helm_version: v2.14.1
 terraform_version: 0.12.10
-dive_version: 0.7.2
+dive_version: 0.8.1
 
 gems:
   rake: "12.3.2"
