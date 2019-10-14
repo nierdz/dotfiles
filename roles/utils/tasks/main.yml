@@ -21,21 +21,6 @@
   notify:
     - apt update
 
-- name: Configure nautilus bookmarks (global)
-  become: true
-  template:
-    src: etc/xdg/user-dirs.defaults.j2
-    dest: /etc/xdg/user-dirs.defaults
-    mode: 0644
-    owner: root
-    group: root
-
-- name: Configure nautilus bookmarks (user)
-  template:
-    src: .config/user-dirs.dirs.j2
-    dest: ~/.config/user-dirs.dirs
-    mode: 0644
-
 - name: Install useful packages
   become: true
   apt:
@@ -323,15 +308,6 @@
     src: .ssh/config.j2
     dest: ~/.ssh/config
     mode: 0600
-
-- name: Configure NetworkManager to handle ethernet card
-  become: true
-  replace:
-    path: /etc/NetworkManager/NetworkManager.conf
-    regexp: '^\[ifupdown\]\nmanaged=[a-z]*$'
-    replace: '[ifupdown]\nmanaged=true'
-  notify:
-    - NetworkManager restart
 
 - name: Add autocompletion for terraform, packer and travis
   blockinfile:
