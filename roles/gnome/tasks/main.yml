@@ -1,3 +1,4 @@
 ---
 - name: Let me use Control+Shift+E key in terminator please !
   command: gsettings set org.freedesktop.ibus.panel.emoji hotkey "['<Control><Shift>j']"
+  changed_when: false
