@@ -1,4 +1,11 @@
 ---
+- name: Use vim as default editor
+  become: true
+  alternatives:
+    name: editor
+    path: /usr/libexec/vim/vim.basic
+  changed_when: false
+
 - name: Create .vimrc configuration file
   template:
     src: .vimrc.j2
@@ -12,7 +19,24 @@
     replace: '"  set mouse=a'
   ignore_errors: true
 
-- name: Create ~/.yamllint.yml configuration file
-  template:
-    src: .yamllint.yml.j2
-    dest: ~/.yamllint.yml
+- name: Create Vim configuration directory
+  file:
+    path: "~/.vim"
+    state: directory
+
+- name: Create Vundle directory
+  file:
+    path: "~/.vim/bundle"
+    state: directory
+
+- name: Clone Vundle repository
+  git:
+    repo: "https://github.com/VundleVim/Vundle.vim.git"
+    dest: "~/.vim/bundle/Vundle.vim"
+    update: true
+    force: true
+    version: "{{ vundle_version }}"
+
+- name: Install Vundle plugins
+  command: 'vim -E -s -c "source ~/.vimrc" -c PluginInstall -c qa'
+  changed_when: false
