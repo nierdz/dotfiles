@@ -38,6 +38,7 @@ packages:
   - firmware-linux-free
   - firmware-linux-nonfree
   - gdm3
+  - gnome-core
   - gnome-shell
   - gnome-tweak-tool
   - golang
