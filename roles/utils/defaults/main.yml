@@ -35,6 +35,7 @@ packages:
   - file-roller
   - filezilla
   - firefox
+  - firmware-linux
   - firmware-linux-free
   - firmware-linux-nonfree
   - gdm3
