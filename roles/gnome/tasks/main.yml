@@ -26,3 +26,16 @@
     replace: '[ifupdown]\nmanaged=true'
   notify:
     - NetworkManager restart
+
+- name: Remove default gnome folders
+  file:
+    path: "~/{{ item }}"
+    state: absent
+  with_items:
+    - Desktop
+    - Documents
+    - Music
+    - Pictures
+    - Public
+    - Templates
+    - Videos
