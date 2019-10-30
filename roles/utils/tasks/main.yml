@@ -21,6 +21,24 @@
   notify:
     - apt update
 
+- name: Remove useless packages
+  become: true
+  apt:
+    name: firefox-esr
+    state: absent
+
+- name: Install firefox from unstable repository
+  become: true
+  apt:
+    name: firefox
+    state: present
+    update_cache: true
+    default_release: unstable
+  register: firefox_installed
+  until: firefox_installed is success
+  retries: 10
+  delay: 2
+
 - name: Install useful packages
   become: true
   apt:
