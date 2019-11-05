@@ -112,6 +112,28 @@
     group: root
   when: current_terraform_version.stdout != terraform_version
 
+- name: Check Packer version # noqa 306
+  shell: >
+    packer --version |
+    head -n1 |
+    grep -o {{ packer_version }}
+  args:
+    executable: /bin/bash
+  failed_when: false
+  changed_when: false
+  register: current_packer_version
+
+- name: Install Packer if needed
+  become: true
+  unarchive:
+    src: "https://releases.hashicorp.com/packer/{{ packer_version }}/packer_{{ packer_version }}_linux_amd64.zip"
+    dest: /usr/local/bin
+    remote_src: true
+    mode: 0755
+    owner: root
+    group: root
+  when: current_packer_version.stdout != packer_version
+
 - name: Install useful gems
   gem:
     name: "{{ item.key }}"

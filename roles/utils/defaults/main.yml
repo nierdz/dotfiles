@@ -8,6 +8,7 @@ binaries:
 
 helm_version: v2.14.1
 terraform_version: 0.12.10
+packer_version: 1.4.4
 dive_version: 0.8.1
 
 gems:
