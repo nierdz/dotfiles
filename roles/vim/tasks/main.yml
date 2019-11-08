@@ -3,7 +3,7 @@
   become: true
   alternatives:
     name: editor
-    path: /usr/libexec/vim/vim.basic
+    path: /usr/bin/vim
   changed_when: false
 
 - name: Create .vimrc configuration file
