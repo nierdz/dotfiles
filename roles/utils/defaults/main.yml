@@ -30,6 +30,7 @@ packages:
   - bash-completion
   - build-essential
   - ccze
+  - cups
   - curl
   - dnsutils
   - evince
