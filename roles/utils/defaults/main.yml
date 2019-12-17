@@ -7,7 +7,7 @@ binaries:
   stern: "https://github.com/wercker/stern/releases/download/1.11.0/stern_linux_amd64"
 
 helm_version: v2.14.1
-terraform_version: 0.12.13
+terraform_version: 0.12.18
 packer_version: 1.4.4
 dive_version: 0.8.1
 
