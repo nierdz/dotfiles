@@ -10,6 +10,7 @@ helm_version: v2.14.1
 terraform_version: 0.12.18
 packer_version: 1.4.4
 dive_version: 0.8.1
+tflint_version: 0.13.3
 
 gems:
   rake: "12.3.2"

@@ -134,6 +134,27 @@
     group: root
   when: current_packer_version.stdout != packer_version
 
+- name: Check tflint version # noqa 306
+  shell: >
+    terraform --version |
+    grep -o {{ tflint_version }}
+  args:
+    executable: /bin/bash
+  failed_when: false
+  changed_when: false
+  register: current_tflint_version
+
+- name: Install tflint if needed
+  become: true
+  unarchive:
+    src: "https://github.com/terraform-linters/tflint/releases/download/v{{ tflint_version }}/tflint_linux_amd64.zip"
+    dest: /usr/local/bin
+    remote_src: true
+    mode: 0755
+    owner: root
+    group: root
+  when: current_tflint_version.stdout != tflint_version
+
 - name: Install useful gems
   gem:
     name: "{{ item.key }}"
