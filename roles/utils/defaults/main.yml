@@ -6,7 +6,7 @@ binaries:
   jl: "https://github.com/koenbollen/jl/releases/download/v1.2.0/jl_linux_amd64"
   stern: "https://github.com/wercker/stern/releases/download/1.11.0/stern_linux_amd64"
 
-helm_version: v2.14.1
+helm_version: v3.0.2
 terraform_version: 0.12.18
 packer_version: 1.5.0
 dive_version: 0.8.1
