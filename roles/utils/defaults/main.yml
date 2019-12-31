@@ -13,7 +13,7 @@ dive_version: 0.9.1
 tflint_version: 0.13.4
 
 gems:
-  rake: "12.3.2"
+  rake: "12.3.3"
   serverspec: "2.41.3"
 
 google_cloud_sdk_version: "274.0.1-0"
