@@ -46,7 +46,7 @@ run-ansible: ## Run ansible on full playbook
 	$(info --> Run ansible on full playbook)
 	@( \
 		source $(VIRTUALENV_DIR)/bin/activate; \
-		ansible-playbook playbook.yml; \
+		ansible-playbook --diff playbook.yml; \
 	)
 
 tests: ## Run all tests
