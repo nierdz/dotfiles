@@ -5,6 +5,7 @@ binaries:
   hadolint: "https://github.com/hadolint/hadolint/releases/download/v1.17.3/hadolint-Linux-x86_64"
   jl: "https://github.com/koenbollen/jl/releases/download/v1.2.0/jl_linux_amd64"
   stern: "https://github.com/wercker/stern/releases/download/1.11.0/stern_linux_amd64"
+  gitlab-runner: "https://gitlab-runner-downloads.s3.amazonaws.com/v12.7.1/binaries/gitlab-runner-linux-amd64"
 
 helm_version: v3.0.2
 terraform_version: 0.12.18
