@@ -180,6 +180,15 @@
         fi
       done
 
+- name: Delete history config from ~/.bashrc
+  lineinfile:
+    dest: ~/.bashrc
+    state: absent
+    regexp: '^{{ item }}=.*$'
+  with_items:
+    - HISTSIZE
+    - HISTFILESIZE
+
 - name: Clone bash-git-prompt repository
   git:
     repo: "https://github.com/magicmonty/bash-git-prompt.git"
