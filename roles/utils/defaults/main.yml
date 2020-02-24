@@ -24,7 +24,6 @@ pip_packages:
   - molecule==2.22
   - pre-commit==1.20.0
 
-
 packages:
   - ack
   - aspell-en
