@@ -60,6 +60,7 @@ packages:
   - numix-icon-theme
   - pepperflashplugin-nonfree
   - python-docker
+  - python3-pip
   - rhythmbox
   - rsync
   - shellcheck
