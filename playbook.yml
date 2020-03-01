@@ -8,3 +8,4 @@
     - { role: base16, tags: ['base16'] }
     - { role: php, tags: ['php'] }
     - { role: gnome, tags: ['gnome'] }
+    - { role: bind, tags: ['bind'] }
