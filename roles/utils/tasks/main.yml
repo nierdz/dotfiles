@@ -404,7 +404,7 @@
 - name: Install pip packages
   pip:
     name: "{{ pip_packages }}"
-    executable: /usr/bin/pip
+    executable: /usr/bin/pip3
 
 - name: Create ~/.yamllint.yml configuration file
   template:
