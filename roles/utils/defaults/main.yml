@@ -23,6 +23,7 @@ kubectl_version: "1.17.3-00"
 pip_packages:
   - molecule==3.0.2
   - pre-commit==2.1.1
+  - docker==4.2.0
 
 packages:
   - ack
