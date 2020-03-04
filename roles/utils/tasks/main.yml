@@ -391,7 +391,7 @@
     dest: ~/.ssh/config
     mode: 0600
 
-- name: Add autocompletion for terraform, packer and travis
+- name: Add autocompletion for terraform, packer, travis and kubectl
   blockinfile:
     path: ~/.bashrc
     marker: "# {mark} ANSIBLE MANAGED BLOCK Autocompletion"
@@ -400,6 +400,7 @@
       complete -C /usr/local/bin/terraform terraform
       complete -C /usr/local/bin/packer packer
       [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
+      source <(kubectl completion bash)
 
 - name: Install pip packages
   pip:
