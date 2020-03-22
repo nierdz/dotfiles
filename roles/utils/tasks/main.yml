@@ -189,22 +189,6 @@
     - HISTSIZE
     - HISTFILESIZE
 
-- name: Clone bash-git-prompt repository
-  git:
-    repo: "https://github.com/magicmonty/bash-git-prompt.git"
-    dest: "~/.bash-git-prompt"
-    update: true
-    force: true
-    depth: 1
-  tags:
-    - skip_ansible_lint
-
-- name: Add bash-git-prompt configuration file
-  template:
-    src: bash-git-prompt.j2
-    dest: ~/.bashrc.d/bash-git-prompt
-    mode: 0755
-
 - name: Create global git config
   template:
     src: .gitconfig.j2
