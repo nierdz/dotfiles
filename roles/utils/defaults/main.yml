@@ -12,6 +12,7 @@ terraform_version: 0.12.18
 packer_version: 1.5.0
 dive_version: 0.9.1
 tflint_version: 0.13.4
+starship_version: 0.38.0
 
 gems:
   rake: "12.3.3"
