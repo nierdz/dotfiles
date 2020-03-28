@@ -90,13 +90,6 @@
     group: root
   when: starship_downloaded is changed
 
-- name: Activate starship
-  lineinfile:
-    dest: ~/.bashrc
-    state: present
-    insertafter: EOF
-    line: eval "$(starship init bash)"
-
 - name: Create starship config
   template:
     src: .config/starship.toml.j2
@@ -204,74 +197,11 @@
     state: present
   with_dict: "{{ gems }}"
 
-- name: Create ~/.bashrc.d directory
-  file:
-    path: ~/.bashrc.d
-    state: directory
-
-- name: Source all files in ~/.bashrc.d directory
-  blockinfile:
-    path: ~/.bashrc
-    marker: "# {mark} ANSIBLE MANAGED BLOCK Source ~/.bashrc.d directory"
-    insertafter: EOF
-    block: |
-      for file in ~/.bashrc.d/*; do
-        if [ -r "$file" ]; then
-          # shellcheck source=/dev/null
-          . "$file"
-        fi
-      done
-
-- name: Delete history config from ~/.bashrc
-  lineinfile:
-    dest: ~/.bashrc
-    state: absent
-    regexp: '^{{ item }}=.*$'
-  with_items:
-    - HISTSIZE
-    - HISTFILESIZE
-
 - name: Create global git config
   template:
     src: .gitconfig.j2
     dest: ~/.gitconfig
     mode: 0644
-
-- name: Add terminator configuration file for title bar
-  template:
-    src: terminator.j2
-    dest: ~/.bashrc.d/terminator
-    mode: 0755
-
-- name: Add better history configuration
-  template:
-    src: history.j2
-    dest: ~/.bashrc.d/history
-    mode: 0755
-
-- name: Add golang configuration
-  template:
-    src: golang.j2
-    dest: ~/.bashrc.d/golang
-    mode: 0755
-
-- name: Add some gcloud aliases
-  template:
-    src: gcloud.j2
-    dest: ~/.bashrc.d/gcloud
-    mode: 0755
-
-- name: Add some aliases
-  template:
-    src: aliases.j2
-    dest: ~/.bashrc.d/aliases
-    mode: 0755
-
-- name: Modify PATH
-  template:
-    src: path.j2
-    dest: ~/.bashrc.d/path
-    mode: 0755
 
 - name: Create golang directory
   file:
@@ -416,17 +346,6 @@
     src: .ssh/config.j2
     dest: ~/.ssh/config
     mode: 0600
-
-- name: Add autocompletion for terraform, packer, travis and kubectl
-  blockinfile:
-    path: ~/.bashrc
-    marker: "# {mark} ANSIBLE MANAGED BLOCK Autocompletion"
-    insertafter: EOF
-    block: |
-      complete -C /usr/local/bin/terraform terraform
-      complete -C /usr/local/bin/packer packer
-      [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
-      source <(kubectl completion bash)
 
 - name: Install pip packages
   pip:
