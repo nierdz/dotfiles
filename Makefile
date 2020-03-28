@@ -17,8 +17,8 @@ pre-install: ## Install dependencies
 			gnome \
 			keepassx \
 			python-apt \
-			python-pip \
-			python-virtualenv \
+			python3-pip \
+			python3-virtualenv \
 			ruby \
 			vim \
 			terminator; \
