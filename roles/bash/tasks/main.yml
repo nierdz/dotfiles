@@ -1,0 +1,35 @@
+---
+- name: Create ~/.bashrc
+  template:
+    src: bashrc.j2
+    dest: ~/.bashrc
+    mode: 0755
+
+- name: Create ~/.bashrc.d directory
+  file:
+    path: ~/.bashrc.d
+    state: directory
+
+- name: Add golang configuration
+  template:
+    src: golang.j2
+    dest: ~/.bashrc.d/golang
+    mode: 0755
+
+- name: Add some gcloud aliases
+  template:
+    src: gcloud.j2
+    dest: ~/.bashrc.d/gcloud
+    mode: 0755
+
+- name: Add some aliases
+  template:
+    src: aliases.j2
+    dest: ~/.bashrc.d/aliases
+    mode: 0755
+
+- name: Modify PATH
+  template:
+    src: path.j2
+    dest: ~/.bashrc.d/path
+    mode: 0755
