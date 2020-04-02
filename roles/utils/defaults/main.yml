@@ -7,7 +7,6 @@ binaries:
   stern: "https://github.com/wercker/stern/releases/download/1.11.0/stern_linux_amd64"
   gitlab-runner: "https://gitlab-runner-downloads.s3.amazonaws.com/v12.7.1/binaries/gitlab-runner-linux-amd64"
 
-helm_version: v3.0.2
 terraform_version: 0.12.18
 packer_version: 1.5.5
 dive_version: 0.9.1

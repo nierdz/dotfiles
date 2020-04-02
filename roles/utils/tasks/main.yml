@@ -96,35 +96,6 @@
     dest: ~/.config/starship.toml
     mode: 0644
 
-- name: Check helm version # noqa 306
-  shell: >
-    helm version 2>/dev/null |
-    grep -o {{ helm_version }}
-  args:
-    executable: /bin/bash
-  failed_when: false
-  changed_when: false
-  register: current_helm_version
-
-- name: Download helm if needed
-  become: true
-  unarchive:
-    src: "https://get.helm.sh/helm-{{ helm_version }}-linux-amd64.tar.gz"
-    dest: "/tmp"
-    remote_src: true
-  register: helm_downloaded
-  when: current_helm_version.stdout != helm_version
-
-- name: Install helm if needed
-  become: true
-  copy:
-    src: /tmp/linux-amd64/helm
-    dest: /usr/local/bin/helm
-    mode: 0755
-    owner: root
-    group: root
-  when: helm_downloaded is changed
-
 - name: Check Terraform version # noqa 306
   shell: >
     terraform --version |
