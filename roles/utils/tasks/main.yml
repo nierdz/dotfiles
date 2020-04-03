@@ -63,7 +63,7 @@
 
 - name: Check startship version # noqa 306
   shell: >
-    startship --version 2>/dev/null |
+    starship --version 2>/dev/null |
     grep -o {{ starship_version }}
   args:
     executable: /bin/bash
