@@ -226,6 +226,10 @@
   retries: 10
   delay: 2
 
+- name: Check if chrome is already installed
+  package_facts:
+    manager: "auto"
+
 - name: Install evil chrome
   become: true
   apt:
@@ -234,6 +238,7 @@
   until: chrome_installed is success
   retries: 10
   delay: 2
+  when: '"google-chrome-stable" not in ansible_facts.packages'
 
 - name: Install dive
   become: true
