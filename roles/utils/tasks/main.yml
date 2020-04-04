@@ -75,20 +75,12 @@
   become: true
   unarchive:
     src: "https://github.com/starship/starship/releases/download/v{{ starship_version }}/starship-x86_64-unknown-linux-gnu.tar.gz"
-    dest: "/tmp"
+    dest: "/usr/local/bin/"
     remote_src: true
-  register: starship_downloaded
-  when: current_starship_version.stdout != starship_version
-
-- name: Install starship if needed
-  become: true
-  copy:
-    src: /tmp/starship
-    dest: /usr/local/bin/starship
     mode: 0755
     owner: root
     group: root
-  when: starship_downloaded is changed
+  when: current_starship_version.stdout != starship_version
 
 - name: Create starship config
   template:
