@@ -50,16 +50,28 @@
   retries: 10
   delay: 2
 
-- name: Install useful binaries
+- name: Check binaries versions
+  shell: >
+    set -o pipefail;
+    /usr/local/bin/{{ item.value.check }} | head -n 1
+  args:
+    executable: /usr/bin/bash
+  failed_when: false
+  changed_when: false
+  register: current_binaries_versions
+  loop: "{{ binaries | dict2items }}"
+
+- name: Download binaries if needed
   become: true
   get_url:
-    url: "{{ item.value }}"
-    dest: "/usr/local/bin/{{ item.key }}"
+    url: "{{ item.item.value.url }}"
+    dest: "/usr/local/bin/{{ item.item.key }}"
     force: true
     mode: 0755
     owner: root
     group: root
-  with_dict: "{{ binaries }}"
+  loop: "{{ current_binaries_versions.results }}"
+  when: item.stdout is not search(item.item.value.version)
 
 - name: Check startship version # noqa 306
   shell: >

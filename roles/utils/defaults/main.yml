@@ -1,11 +1,26 @@
 ---
 
 binaries:
-  docker-compose: "https://github.com/docker/compose/releases/download/1.25.0/docker-compose-Linux-x86_64"
-  hadolint: "https://github.com/hadolint/hadolint/releases/download/v1.17.3/hadolint-Linux-x86_64"
-  jl: "https://github.com/koenbollen/jl/releases/download/v1.2.0/jl_linux_amd64"
-  stern: "https://github.com/wercker/stern/releases/download/1.11.0/stern_linux_amd64"
-  gitlab-runner: "https://gitlab-runner-downloads.s3.amazonaws.com/v12.7.1/binaries/gitlab-runner-linux-amd64"
+  docker-compose:
+    version: 1.25.0
+    check: docker-compose version --short
+    url: https://github.com/docker/compose/releases/download/1.25.0/docker-compose-Linux-x86_64
+  hadolint:
+    version: 1.17.3
+    check: hadolint --version
+    url: https://github.com/hadolint/hadolint/releases/download/v1.17.3/hadolint-Linux-x86_64
+  jl:
+    version: 1.2.0
+    check: jl --version
+    url: https://github.com/koenbollen/jl/releases/download/v1.2.0/jl_linux_amd64
+  stern:
+    version: 1.11.0
+    check: stern --version
+    url: https://github.com/wercker/stern/releases/download/1.11.0/stern_linux_amd64
+  gitlab-runner:
+    version: 12.7.1
+    check: gitlab-runner --version
+    url: https://gitlab-runner-downloads.s3.amazonaws.com/v12.7.1/binaries/gitlab-runner-linux-amd64
 
 terraform_version: 0.12.18
 packer_version: 1.5.5
