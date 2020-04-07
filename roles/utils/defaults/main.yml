@@ -1,32 +1,68 @@
 ---
 
 binaries:
-  docker-compose: "https://github.com/docker/compose/releases/download/1.25.0/docker-compose-Linux-x86_64"
-  hadolint: "https://github.com/hadolint/hadolint/releases/download/v1.17.3/hadolint-Linux-x86_64"
-  jl: "https://github.com/koenbollen/jl/releases/download/v1.2.0/jl_linux_amd64"
-  stern: "https://github.com/wercker/stern/releases/download/1.11.0/stern_linux_amd64"
-  gitlab-runner: "https://gitlab-runner-downloads.s3.amazonaws.com/v12.7.1/binaries/gitlab-runner-linux-amd64"
+  docker-compose:
+    version: 1.25.4
+    check: docker-compose version --short
+    url: https://github.com/docker/compose/releases/download/1.25.4/docker-compose-Linux-x86_64
+  hadolint:
+    version: 1.17.5
+    check: hadolint --version
+    url: https://github.com/hadolint/hadolint/releases/download/v1.17.5/hadolint-Linux-x86_64
+  jl:
+    version: 1.2.0
+    check: jl --version
+    url: https://github.com/koenbollen/jl/releases/download/v1.2.0/jl_linux_amd64
+  stern:
+    version: 1.11.0
+    check: stern --version
+    url: https://github.com/wercker/stern/releases/download/1.11.0/stern_linux_amd64
+  gitlab-runner:
+    version: 12.9.0
+    check: gitlab-runner --version
+    url: https://gitlab-runner-downloads.s3.amazonaws.com/v12.9.0/binaries/gitlab-runner-linux-amd64
+  kubectl:
+    version: 1.18.0
+    check: kubectl version --client=true
+    url: https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl
 
-helm_version: v3.0.2
-terraform_version: 0.12.18
-packer_version: 1.5.5
-dive_version: 0.9.1
-tflint_version: 0.13.4
-starship_version: 0.38.0
+archived_binaries:
+  terraform:
+    version: 0.12.24
+    check: terraform version
+    url: https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip
+  packer:
+    version: 1.5.5
+    check: packer --version
+    url: https://releases.hashicorp.com/packer/1.5.5/packer_1.5.5_linux_amd64.zip
+  dive:
+    version: 0.9.2
+    check: dive --version
+    url: https://github.com/wagoodman/dive/releases/download/v0.9.2/dive_0.9.2_linux_amd64.tar.gz
+  tflint:
+    version: 0.15.4
+    check: tflint --version
+    url: https://github.com/terraform-linters/tflint/releases/download/v0.15.4/tflint_linux_amd64.zip
+  starship:
+    version: 0.38.0
+    check: starship --version
+    url: https://github.com/starship/starship/releases/download/v0.38.0/starship-x86_64-unknown-linux-gnu.tar.gz
+  kustomize:
+    version: 3.5.4
+    check: kustomize version
+    url: https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv3.5.4/kustomize_v3.5.4_linux_amd64.tar.gz
 
 gems:
   rake: "12.3.3"
   serverspec: "2.41.3"
 
-google_cloud_sdk_version: "286.0.0-0"
-kubectl_version: "1.17.4-00"
+google_cloud_sdk_version: "287.0.0-0"
 
 pip_packages:
-  - molecule==3.0.2
   - pre-commit==2.1.1
   - docker==4.2.0
 
-packages:
+useful_packages:
   - ack
   - aspell-en
   - aspell-fr

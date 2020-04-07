@@ -27,6 +27,10 @@
     name: firefox-esr
     state: absent
 
+- name: Inject packages list in ansible_facts
+  package_facts:
+    manager: "auto"
+
 - name: Install firefox from unstable repository
   become: true
   apt:
@@ -34,6 +38,7 @@
     state: present
     update_cache: true
     default_release: unstable
+  when: '"firefox" not in ansible_facts.packages'
   register: firefox_installed
   until: firefox_installed is success
   retries: 10
@@ -42,7 +47,7 @@
 - name: Install useful packages
   become: true
   apt:
-    name: "{{ packages }}"
+    name: "{{ useful_packages }}"
     state: present
     update_cache: true
   register: packages_installed
@@ -50,152 +55,57 @@
   retries: 10
   delay: 2
 
-- name: Install useful binaries
+- name: Check binaries versions
+  shell: >
+    set -o pipefail;
+    /usr/local/bin/{{ item.value.check }} | head -n 1
+  args:
+    executable: /usr/bin/bash
+  failed_when: false
+  changed_when: false
+  register: current_binaries_versions
+  loop: "{{ binaries | dict2items }}"
+
+- name: Download binaries if needed
   become: true
   get_url:
-    url: "{{ item.value }}"
-    dest: "/usr/local/bin/{{ item.key }}"
+    url: "{{ item.item.value.url }}"
+    dest: "/usr/local/bin/{{ item.item.key }}"
     force: true
     mode: 0755
     owner: root
     group: root
-  with_dict: "{{ binaries }}"
+  loop: "{{ current_binaries_versions.results }}"
+  when: item.stdout is not search(item.item.value.version)
 
-- name: Check startship version # noqa 306
+- name: Check archived binaries versions
   shell: >
-    startship --version 2>/dev/null |
-    grep -o {{ starship_version }}
+    set -o pipefail;
+    /usr/local/bin/{{ item.value.check }} | head -n 1
   args:
-    executable: /bin/bash
+    executable: /usr/bin/bash
   failed_when: false
   changed_when: false
-  register: current_starship_version
+  register: current_archived_binaries_versions
+  loop: "{{ archived_binaries | dict2items }}"
 
-- name: Download starship if needed
+- name: Download archived binaries if needed
   become: true
   unarchive:
-    src: "https://github.com/starship/starship/releases/download/v{{ starship_version }}/starship-x86_64-unknown-linux-gnu.tar.gz"
-    dest: "/tmp"
+    src: "{{ item.item.value.url }}"
+    dest: /usr/local/bin
     remote_src: true
-  register: starship_downloaded
-  when: current_starship_version.stdout != starship_version
-
-- name: Install starship if needed
-  become: true
-  copy:
-    src: /tmp/starship
-    dest: /usr/local/bin/starship
     mode: 0755
     owner: root
     group: root
-  when: starship_downloaded is changed
-
-- name: Activate starship
-  lineinfile:
-    dest: ~/.bashrc
-    state: present
-    insertafter: EOF
-    line: eval "$(starship init bash)"
+  loop: "{{ current_archived_binaries_versions.results }}"
+  when: item.stdout is not search(item.item.value.version)
 
 - name: Create starship config
   template:
     src: .config/starship.toml.j2
     dest: ~/.config/starship.toml
     mode: 0644
-
-- name: Check helm version # noqa 306
-  shell: >
-    helm version 2>/dev/null |
-    grep -o {{ helm_version }}
-  args:
-    executable: /bin/bash
-  failed_when: false
-  changed_when: false
-  register: current_helm_version
-
-- name: Download helm if needed
-  become: true
-  unarchive:
-    src: "https://get.helm.sh/helm-{{ helm_version }}-linux-amd64.tar.gz"
-    dest: "/tmp"
-    remote_src: true
-  register: helm_downloaded
-  when: current_helm_version.stdout != helm_version
-
-- name: Install helm if needed
-  become: true
-  copy:
-    src: /tmp/linux-amd64/helm
-    dest: /usr/local/bin/helm
-    mode: 0755
-    owner: root
-    group: root
-  when: helm_downloaded is changed
-
-- name: Check Terraform version # noqa 306
-  shell: >
-    terraform --version |
-    head -n1 |
-    grep -o {{ terraform_version }}
-  args:
-    executable: /bin/bash
-  failed_when: false
-  changed_when: false
-  register: current_terraform_version
-
-- name: Install Terraform if needed
-  become: true
-  unarchive:
-    src: "https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip"
-    dest: /usr/local/bin
-    remote_src: true
-    mode: 0755
-    owner: root
-    group: root
-  when: current_terraform_version.stdout != terraform_version
-
-- name: Check Packer version # noqa 306
-  shell: >
-    packer --version |
-    head -n1 |
-    grep -o {{ packer_version }}
-  args:
-    executable: /bin/bash
-  failed_when: false
-  changed_when: false
-  register: current_packer_version
-
-- name: Install Packer if needed
-  become: true
-  unarchive:
-    src: "https://releases.hashicorp.com/packer/{{ packer_version }}/packer_{{ packer_version }}_linux_amd64.zip"
-    dest: /usr/local/bin
-    remote_src: true
-    mode: 0755
-    owner: root
-    group: root
-  when: current_packer_version.stdout != packer_version
-
-- name: Check tflint version # noqa 306
-  shell: >
-    terraform --version |
-    grep -o {{ tflint_version }}
-  args:
-    executable: /bin/bash
-  failed_when: false
-  changed_when: false
-  register: current_tflint_version
-
-- name: Install tflint if needed
-  become: true
-  unarchive:
-    src: "https://github.com/terraform-linters/tflint/releases/download/v{{ tflint_version }}/tflint_linux_amd64.zip"
-    dest: /usr/local/bin
-    remote_src: true
-    mode: 0755
-    owner: root
-    group: root
-  when: current_tflint_version.stdout != tflint_version
 
 - name: Install useful gems
   gem:
@@ -204,74 +114,11 @@
     state: present
   with_dict: "{{ gems }}"
 
-- name: Create ~/.bashrc.d directory
-  file:
-    path: ~/.bashrc.d
-    state: directory
-
-- name: Source all files in ~/.bashrc.d directory
-  blockinfile:
-    path: ~/.bashrc
-    marker: "# {mark} ANSIBLE MANAGED BLOCK Source ~/.bashrc.d directory"
-    insertafter: EOF
-    block: |
-      for file in ~/.bashrc.d/*; do
-        if [ -r "$file" ]; then
-          # shellcheck source=/dev/null
-          . "$file"
-        fi
-      done
-
-- name: Delete history config from ~/.bashrc
-  lineinfile:
-    dest: ~/.bashrc
-    state: absent
-    regexp: '^{{ item }}=.*$'
-  with_items:
-    - HISTSIZE
-    - HISTFILESIZE
-
 - name: Create global git config
   template:
     src: .gitconfig.j2
     dest: ~/.gitconfig
     mode: 0644
-
-- name: Add terminator configuration file for title bar
-  template:
-    src: terminator.j2
-    dest: ~/.bashrc.d/terminator
-    mode: 0755
-
-- name: Add better history configuration
-  template:
-    src: history.j2
-    dest: ~/.bashrc.d/history
-    mode: 0755
-
-- name: Add golang configuration
-  template:
-    src: golang.j2
-    dest: ~/.bashrc.d/golang
-    mode: 0755
-
-- name: Add some gcloud aliases
-  template:
-    src: gcloud.j2
-    dest: ~/.bashrc.d/gcloud
-    mode: 0755
-
-- name: Add some aliases
-  template:
-    src: aliases.j2
-    dest: ~/.bashrc.d/aliases
-    mode: 0755
-
-- name: Modify PATH
-  template:
-    src: path.j2
-    dest: ~/.bashrc.d/path
-    mode: 0755
 
 - name: Create golang directory
   file:
@@ -310,17 +157,6 @@
   retries: 10
   delay: 2
 
-- name: Install kubectl
-  become: true
-  apt:
-    name: kubectl={{ kubectl_version }}
-    state: present
-    update_cache: true
-  register: packages_installed
-  until: packages_installed is success
-  retries: 10
-  delay: 2
-
 - name: Install evil chrome
   become: true
   apt:
@@ -329,15 +165,7 @@
   until: chrome_installed is success
   retries: 10
   delay: 2
-
-- name: Install dive
-  become: true
-  apt:
-    deb: https://github.com/wagoodman/dive/releases/download/v{{ dive_version }}/dive_{{ dive_version }}_linux_amd64.deb
-  register: dive_installed
-  until: dive_installed is success
-  retries: 10
-  delay: 2
+  when: '"google-chrome-stable" not in ansible_facts.packages'
 
 - name: Add spotify apt-key
   become: true
@@ -365,6 +193,7 @@
     name: spotify-client
     state: present
     update_cache: true
+  when: '"spotify-client" not in ansible_facts.packages'
   register: spotify_installed
   until: spotify_installed is success
   retries: 10
@@ -399,6 +228,7 @@
       - containerd.io
     state: present
     update_cache: true
+  when: '"docker-ce" not in ansible_facts.packages'
   register: docker_installed
   until: docker_installed is success
   retries: 10
@@ -416,17 +246,6 @@
     src: .ssh/config.j2
     dest: ~/.ssh/config
     mode: 0600
-
-- name: Add autocompletion for terraform, packer, travis and kubectl
-  blockinfile:
-    path: ~/.bashrc
-    marker: "# {mark} ANSIBLE MANAGED BLOCK Autocompletion"
-    insertafter: EOF
-    block: |
-      complete -C /usr/local/bin/terraform terraform
-      complete -C /usr/local/bin/packer packer
-      [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
-      source <(kubectl completion bash)
 
 - name: Install pip packages
   pip:

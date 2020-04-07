@@ -1,0 +1,68 @@
+# {{ ansible_managed }}
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
+
+# If not running interactively, don't do anything
+case $- in
+  *i*) ;;
+  *) return;;
+esac
+
+# Terminator title (keep this to the top)
+PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
+
+# History section
+shopt -s checkwinsize
+shopt -s cmdhist
+shopt -s histappend
+export HISTSIZE=100000
+export HISTFILESIZE=200000
+export HISTTIMEFORMAT="%F - %T : "
+export HISTCONTROL=ignoreboth
+export PROMPT_COMMAND="${PROMPT_COMMAND}; history -a; history -c; history -r"
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+  debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/"
+if [ -s "$BASE16_SHELL/profile_helper.sh" ]; then
+  eval "$("$BASE16_SHELL/profile_helper.sh")"
+fi
+if [ -z "$BASE16_THEME" ] && type base16_material &>/dev/null; then
+  base16_material
+fi
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+  eval "$(dircolors -b)"
+  alias ls='ls -l --color=auto'
+  alias grep='grep --color=auto'
+fi
+
+# Autocompletion
+if ! shopt -oq posix; then
+  source /usr/share/bash-completion/bash_completion
+fi
+complete -C /usr/local/bin/terraform terraform
+complete -C /usr/local/bin/packer packer
+# shellcheck source=/dev/null
+[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
+eval "$(kubectl completion bash)"
+
+# Source ~/.bashrc.d directory
+for file in ~/.bashrc.d/*; do
+  if [ -r "$file" ]; then
+    # shellcheck source=/dev/null
+    source "$file"
+  fi
+done
+
+# Starhip (keep at the end)
+eval "$(starship init bash)"
