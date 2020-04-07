@@ -73,97 +73,34 @@
   loop: "{{ current_binaries_versions.results }}"
   when: item.stdout is not search(item.item.value.version)
 
-- name: Check startship version # noqa 306
+- name: Check archived binaries versions
   shell: >
-    starship --version 2>/dev/null |
-    grep -o {{ starship_version }}
+    set -o pipefail;
+    /usr/local/bin/{{ item.value.check }} | head -n 1
   args:
-    executable: /bin/bash
+    executable: /usr/bin/bash
   failed_when: false
   changed_when: false
-  register: current_starship_version
+  register: current_archived_binaries_versions
+  loop: "{{ archived_binaries | dict2items }}"
 
-- name: Download starship if needed
+- name: Download archived binaries if needed
   become: true
   unarchive:
-    src: "https://github.com/starship/starship/releases/download/v{{ starship_version }}/starship-x86_64-unknown-linux-gnu.tar.gz"
-    dest: "/usr/local/bin/"
+    src: "{{ item.item.value.url }}"
+    dest: /usr/local/bin
     remote_src: true
     mode: 0755
     owner: root
     group: root
-  when: current_starship_version.stdout != starship_version
+  loop: "{{ current_archived_binaries_versions.results }}"
+  when: item.stdout is not search(item.item.value.version)
 
 - name: Create starship config
   template:
     src: .config/starship.toml.j2
     dest: ~/.config/starship.toml
     mode: 0644
-
-- name: Check Terraform version # noqa 306
-  shell: >
-    terraform --version |
-    head -n1 |
-    grep -o {{ terraform_version }}
-  args:
-    executable: /bin/bash
-  failed_when: false
-  changed_when: false
-  register: current_terraform_version
-
-- name: Install Terraform if needed
-  become: true
-  unarchive:
-    src: "https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip"
-    dest: /usr/local/bin
-    remote_src: true
-    mode: 0755
-    owner: root
-    group: root
-  when: current_terraform_version.stdout != terraform_version
-
-- name: Check Packer version # noqa 306
-  shell: >
-    packer --version |
-    head -n1 |
-    grep -o {{ packer_version }}
-  args:
-    executable: /bin/bash
-  failed_when: false
-  changed_when: false
-  register: current_packer_version
-
-- name: Install Packer if needed
-  become: true
-  unarchive:
-    src: "https://releases.hashicorp.com/packer/{{ packer_version }}/packer_{{ packer_version }}_linux_amd64.zip"
-    dest: /usr/local/bin
-    remote_src: true
-    mode: 0755
-    owner: root
-    group: root
-  when: current_packer_version.stdout != packer_version
-
-- name: Check tflint version # noqa 306
-  shell: >
-    terraform --version |
-    grep -o {{ tflint_version }}
-  args:
-    executable: /bin/bash
-  failed_when: false
-  changed_when: false
-  register: current_tflint_version
-
-- name: Install tflint if needed
-  become: true
-  unarchive:
-    src: "https://github.com/terraform-linters/tflint/releases/download/v{{ tflint_version }}/tflint_linux_amd64.zip"
-    dest: /usr/local/bin
-    remote_src: true
-    mode: 0755
-    owner: root
-    group: root
-  when: current_tflint_version.stdout != tflint_version
 
 - name: Install useful gems
   gem:
@@ -239,15 +176,6 @@
   retries: 10
   delay: 2
   when: '"google-chrome-stable" not in ansible_facts.packages'
-
-- name: Install dive
-  become: true
-  apt:
-    deb: https://github.com/wagoodman/dive/releases/download/v{{ dive_version }}/dive_{{ dive_version }}_linux_amd64.deb
-  register: dive_installed
-  until: dive_installed is success
-  retries: 10
-  delay: 2
 
 - name: Add spotify apt-key
   become: true
