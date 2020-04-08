@@ -56,7 +56,7 @@ pip_packages:
   - pre-commit==2.1.1
   - docker==4.2.0
 
-packages:
+useful_packages:
   - ack
   - aspell-en
   - aspell-fr

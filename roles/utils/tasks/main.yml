@@ -27,6 +27,10 @@
     name: firefox-esr
     state: absent
 
+- name: Inject packages list in ansible_facts
+  package_facts:
+    manager: "auto"
+
 - name: Install firefox from unstable repository
   become: true
   apt:
@@ -34,6 +38,7 @@
     state: present
     update_cache: true
     default_release: unstable
+  when: '"firefox" not in ansible_facts.packages'
   register: firefox_installed
   until: firefox_installed is success
   retries: 10
@@ -42,7 +47,7 @@
 - name: Install useful packages
   become: true
   apt:
-    name: "{{ packages }}"
+    name: "{{ useful_packages }}"
     state: present
     update_cache: true
   register: packages_installed
@@ -163,10 +168,6 @@
   retries: 10
   delay: 2
 
-- name: Check if chrome is already installed
-  package_facts:
-    manager: "auto"
-
 - name: Install evil chrome
   become: true
   apt:
@@ -203,6 +204,7 @@
     name: spotify-client
     state: present
     update_cache: true
+  when: '"spotify-client" not in ansible_facts.packages'
   register: spotify_installed
   until: spotify_installed is success
   retries: 10
@@ -237,6 +239,7 @@
       - containerd.io
     state: present
     update_cache: true
+  when: '"docker-ce" not in ansible_facts.packages'
   register: docker_installed
   until: docker_installed is success
   retries: 10
