@@ -24,9 +24,9 @@ binaries:
 
 archived_binaries:
   terraform:
-    version: 0.12.8
+    version: 0.12.24
     check: terraform version
-    url: https://releases.hashicorp.com/terraform/0.12.8/terraform_0.12.8_linux_amd64.zip
+    url: https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip
   packer:
     version: 1.5.5
     check: packer --version
