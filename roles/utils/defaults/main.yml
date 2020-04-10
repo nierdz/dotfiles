@@ -18,9 +18,9 @@ binaries:
     check: stern --version
     url: https://github.com/wercker/stern/releases/download/1.11.0/stern_linux_amd64
   gitlab-runner:
-    version: 12.7.1
+    version: 12.9.0
     check: gitlab-runner --version
-    url: https://gitlab-runner-downloads.s3.amazonaws.com/v12.7.1/binaries/gitlab-runner-linux-amd64
+    url: https://gitlab-runner-downloads.s3.amazonaws.com/v12.9.0/binaries/gitlab-runner-linux-amd64
 
 archived_binaries:
   terraform:
