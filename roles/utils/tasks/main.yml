@@ -157,17 +157,6 @@
   retries: 10
   delay: 2
 
-- name: Install kubectl
-  become: true
-  apt:
-    name: kubectl={{ kubectl_version }}
-    state: present
-    update_cache: true
-  register: packages_installed
-  until: packages_installed is success
-  retries: 10
-  delay: 2
-
 - name: Install evil chrome
   become: true
   apt:

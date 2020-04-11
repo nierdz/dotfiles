@@ -21,6 +21,10 @@ binaries:
     version: 12.9.0
     check: gitlab-runner --version
     url: https://gitlab-runner-downloads.s3.amazonaws.com/v12.9.0/binaries/gitlab-runner-linux-amd64
+  kubectl:
+    version: 1.18.0
+    check: kubectl version --client=true
+    url: https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl
 
 archived_binaries:
   terraform:
@@ -53,7 +57,6 @@ gems:
   serverspec: "2.41.3"
 
 google_cloud_sdk_version: "287.0.0-0"
-kubectl_version: "1.18.0-00"
 
 pip_packages:
   - pre-commit==2.1.1
