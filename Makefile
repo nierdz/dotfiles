@@ -28,6 +28,7 @@ pre-install: ## Install dependencies
 
 install: ## Install everything
 	$(info --> Install everything)
+	@$(MAKE) pre-install
 	@$(MAKE) run-ansible
 
 venv: ## Create python virtualenv if not exists
