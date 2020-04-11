@@ -52,7 +52,6 @@ google_cloud_sdk_version: "287.0.0-0"
 kubectl_version: "1.18.0-00"
 
 pip_packages:
-  - molecule==3.0.2
   - pre-commit==2.1.1
   - docker==4.2.0
 
