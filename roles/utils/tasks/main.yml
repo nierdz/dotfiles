@@ -256,3 +256,12 @@
   template:
     src: .yamllint.yml.j2
     dest: ~/.yamllint.yml
+
+- name: Setup splash screen
+  become: true
+  lineinfile:
+    dest: /etc/default/grub
+    regexp: "^GRUB_CMDLINE_LINUX_DEFAULT=.*"
+    line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"'
+  notify:
+    - update-grub

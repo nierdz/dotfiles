@@ -28,6 +28,7 @@ pre-install: ## Install dependencies
 
 install: ## Install everything
 	$(info --> Install everything)
+	@$(MAKE) pre-install
 	@$(MAKE) run-ansible
 
 venv: ## Create python virtualenv if not exists
@@ -44,10 +45,11 @@ install-ansible: ## Install ansible via pip
 
 run-ansible: ## Run ansible on full playbook
 	$(info --> Run ansible on full playbook)
-	@( \
-		source $(VIRTUALENV_DIR)/bin/activate; \
-		ansible-playbook --diff playbook.yml; \
-	)
+	@export \
+		ANSIBLE_STRATEGY_PLUGINS=venv/lib/python2.7/site-packages/ansible_mitogen/plugins/strategy \
+		&& ANSIBLE_STRATEGY=mitogen_linear \
+		&& source $(VIRTUALENV_DIR)/bin/activate \
+		&& ansible-playbook --diff playbook.yml
 
 tests: ## Run all tests
 	$(info --> Run all tests)

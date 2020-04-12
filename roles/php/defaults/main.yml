@@ -1,9 +1,9 @@
 ---
 php_packages:
-  - php7.3-cli
-  - php7.3-xml
+  - php7.4-cli
+  - php7.4-xml
 php_executable: /usr/bin/php
 composer_path: /usr/local/bin/composer
-composer_release: '1.9.0'
+composer_release: '1.10.5'
 composer_global_packages:
   - wp-coding-standards/wpcs
