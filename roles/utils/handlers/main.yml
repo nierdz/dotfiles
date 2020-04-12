@@ -13,3 +13,7 @@
   systemd:
     name: NetworkManager
     state: restarted
+
+- name: update-grub
+  become: true
+  command: /usr/sbin/update-grub
