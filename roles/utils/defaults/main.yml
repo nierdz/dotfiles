@@ -2,9 +2,9 @@
 
 binaries:
   docker-compose:
-    version: 1.25.4
+    version: 1.25.5
     check: docker-compose version --short
-    url: https://github.com/docker/compose/releases/download/1.25.4/docker-compose-Linux-x86_64
+    url: https://github.com/docker/compose/releases/download/1.25.5/docker-compose-Linux-x86_64
   hadolint:
     version: 1.17.5
     check: hadolint --version
@@ -44,19 +44,19 @@ archived_binaries:
     check: tflint --version
     url: https://github.com/terraform-linters/tflint/releases/download/v0.15.4/tflint_linux_amd64.zip
   starship:
-    version: 0.38.0
+    version: 0.40.1
     check: starship --version
-    url: https://github.com/starship/starship/releases/download/v0.38.0/starship-x86_64-unknown-linux-gnu.tar.gz
+    url: https://github.com/starship/starship/releases/download/v0.40.1/starship-x86_64-unknown-linux-gnu.tar.gz
   kustomize:
     version: 3.5.4
     check: kustomize version
     url: https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv3.5.4/kustomize_v3.5.4_linux_amd64.tar.gz
 
 gems:
-  rake: "12.3.3"
-  serverspec: "2.41.3"
+  rake: "13.0.1"
+  serverspec: "2.41.5"
 
-google_cloud_sdk_version: "288.0.0-0"
+google_cloud_sdk_version: "289.0.0-0"
 
 pip_packages:
   - pre-commit==2.1.1
