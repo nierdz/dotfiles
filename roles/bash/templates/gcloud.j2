@@ -5,5 +5,5 @@ function gcpconf {
 }
 
 function gcplist {
-  gcloud compute instances list
+  gcloud compute instances list --format="table[box](name,creationTimestamp:sort=1,status,metadata.items.version,metadata.items.sha1,INTERNAL_IP)"
 }
