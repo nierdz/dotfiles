@@ -1,7 +1,7 @@
 # {{ ansible_managed }}
 
 function gcpconf {
-    gcloud config configurations list | grep -E --color=auto '.*True.*|$'
+  gcloud config configurations list | grep -E --color=auto '.*True.*|$'
 }
 
 function gcplist {
