@@ -2,3 +2,9 @@
 
 # To avoid mixing venv and globally installed pip packages like molecule and dependencies
 alias molecule="PATH=~/.local/bin/:/usr/local/bin:/usr/bin:/bin ~/.local/bin/molecule"
+
+# To add a fixup on last commit
+function gitfixup {
+  last_commit=$(git rev-parse HEAD)
+  git commit --fixup="${last_commit}"
+}
