@@ -91,6 +91,7 @@ useful_packages:
   - iptraf
   - jq
   - keepassx
+  - libnss3-tools
   - libreoffice-calc
   - libreoffice-writer
   - lsb-release
