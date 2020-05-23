@@ -25,6 +25,10 @@ binaries:
     version: 1.18.0
     check: kubectl version --client=true
     url: https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl
+  mkcert:
+    version: 1.4.1
+    check: mkcert -version
+    url: https://github.com/FiloSottile/mkcert/releases/download/v1.4.1/mkcert-v1.4.1-linux-amd64
 
 archived_binaries:
   terraform:
