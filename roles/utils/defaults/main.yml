@@ -60,7 +60,7 @@ gems:
   rake: "13.0.1"
   serverspec: "2.41.5"
 
-google_cloud_sdk_version: "293.0.0-0"
+google_cloud_sdk_version: "294.0.0-0"
 
 pip_packages:
   - pre-commit==2.1.1
