@@ -18,9 +18,9 @@ binaries:
     check: stern --version
     url: https://github.com/wercker/stern/releases/download/1.11.0/stern_linux_amd64
   kubectl:
-    version: 1.18.0
+    version: 1.18.5
     check: kubectl version --client=true
-    url: https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl
+    url: https://storage.googleapis.com/kubernetes-release/release/v1.18.5/bin/linux/amd64/kubectl
   mkcert:
     version: 1.4.1
     check: mkcert -version
