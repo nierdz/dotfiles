@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/nierdz/tools.svg?branch=master)](https://travis-ci.com/nierdz/tools)
+[![Build Status](https://github.com/nierdz/infra-docker/workflows/CI/badge.svg?branch=master)](https://github.com/nierdz/tools/actions?query=workflow%3ACI)
 
 # Install & configure my laptop
 
@@ -10,6 +10,7 @@
  - use base16 for vim and terminator
  - install php and composer
  - customize bash to my taste
+ - install nodejs and some global packages
 
 # Requirements
 

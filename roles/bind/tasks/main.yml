@@ -23,6 +23,6 @@
 - name: Start bind9 at boot
   become: true
   service:
-    name: bind9
+    name: named
     enabled: true
     state: started
