@@ -59,6 +59,8 @@ gems:
 google_cloud_sdk_version: "306.0.0-0"
 
 nodejs_version: "14.x"
+nodejs_packages:
+  - gulp-cli
 
 pip_packages:
   - pre-commit==2.1.1

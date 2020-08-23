@@ -280,3 +280,11 @@
   apt:
     name: "nodejs={{ nodejs_version|regex_replace('x', '') }}*"
     state: present
+
+- name: Install global nodejs packages
+  become: true
+  npm:
+    name: "{{ item }}"
+    global: true
+    state: present
+  with_items: "{{ nodejs_packages }}"
