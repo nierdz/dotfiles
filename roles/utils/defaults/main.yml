@@ -95,7 +95,6 @@ useful_packages:
   - libnss3-tools
   - libreoffice-calc
   - libreoffice-writer
-  - libxml2-utils
   - lsb-release
   - lsof
   - net-tools
@@ -121,3 +120,4 @@ useful_packages:
   - vlc
   - wget
   - whois
+  - xmlstarlet
