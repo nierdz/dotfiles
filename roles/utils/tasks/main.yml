@@ -235,6 +235,15 @@
     groups: docker
     append: true
 
+- name: Download docker-compose autocomplete file
+  become: true
+  get_url:
+    url: "https://raw.githubusercontent.com/docker/compose/{{ binaries.docker_compose.version }}/contrib/completion/bash/docker-compose"
+    dest: /etc/bash_completion.d/docker-compose
+    mode: 0644
+    owner: root
+    group: root
+
 - name: Configure ssh client
   template:
     src: .ssh/config.j2
