@@ -70,7 +70,7 @@
   become: true
   get_url:
     url: "{{ item.item.value.url }}"
-    dest: "/usr/local/bin/{{ item.item.key }}"
+    dest: "/usr/local/bin/{{ item.item.value.name }}"
     force: true
     mode: 0755
     owner: root
