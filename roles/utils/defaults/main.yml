@@ -1,30 +1,36 @@
 ---
 
 binaries:
-  docker-compose:
-    version: 1.26.1
+  docker_compose:
+    version: 1.27.4
     check: docker-compose version --short
-    url: https://github.com/docker/compose/releases/download/1.26.1/docker-compose-Linux-x86_64
+    url: https://github.com/docker/compose/releases/download/1.27.4/docker-compose-Linux-x86_64
+    name: docker-compose
   hadolint:
     version: 1.18.0
     check: hadolint --version
     url: https://github.com/hadolint/hadolint/releases/download/v1.18.0/hadolint-Linux-x86_64
+    name: hadolint
   jl:
     version: 1.2.0
     check: jl --version
     url: https://github.com/koenbollen/jl/releases/download/v1.2.0/jl_linux_amd64
+    name: jl
   stern:
     version: 1.11.0
     check: stern --version
     url: https://github.com/wercker/stern/releases/download/1.11.0/stern_linux_amd64
+    name: stern
   kubectl:
     version: 1.18.5
     check: kubectl version --client=true
     url: https://storage.googleapis.com/kubernetes-release/release/v1.18.5/bin/linux/amd64/kubectl
+    name: kubectl
   mkcert:
     version: 1.4.1
     check: mkcert -version
     url: https://github.com/FiloSottile/mkcert/releases/download/v1.4.1/mkcert-v1.4.1-linux-amd64
+    name: mkcert
 
 archived_binaries:
   terraform:
@@ -56,7 +62,7 @@ gems:
   rake: "13.0.1"
   serverspec: "2.41.5"
 
-google_cloud_sdk_version: "311.0.0-0"
+google_cloud_sdk_version: "313.0.1-0"
 
 nodejs_version: "14.x"
 nodejs_packages:

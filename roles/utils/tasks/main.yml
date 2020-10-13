@@ -70,7 +70,7 @@
   become: true
   get_url:
     url: "{{ item.item.value.url }}"
-    dest: "/usr/local/bin/{{ item.item.key }}"
+    dest: "/usr/local/bin/{{ item.item.value.name }}"
     force: true
     mode: 0755
     owner: root
@@ -235,6 +235,15 @@
     groups: docker
     append: true
 
+- name: Download docker-compose autocomplete file
+  become: true
+  get_url:
+    url: "https://raw.githubusercontent.com/docker/compose/{{ binaries.docker_compose.version }}/contrib/completion/bash/docker-compose"
+    dest: /etc/bash_completion.d/docker-compose
+    mode: 0644
+    owner: root
+    group: root
+
 - name: Configure ssh client
   template:
     src: .ssh/config.j2
@@ -242,9 +251,8 @@
     mode: 0600
 
 - name: Install pip packages
-  pip:
-    name: "{{ pip_packages }}"
-    executable: /usr/bin/pip3
+  command: /usr/bin/pip3 install {{ item }}
+  with_items: "{{ pip_packages }}"
 
 - name: Create ~/.yamllint.yml configuration file
   template:
