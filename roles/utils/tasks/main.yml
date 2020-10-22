@@ -251,8 +251,9 @@
     mode: 0600
 
 - name: Install pip packages
-  command: /usr/bin/pip3 install {{ item }}
-  with_items: "{{ pip_packages }}"
+  pip:
+    name: "{{ pip_packages }}"
+    executable: /usr/bin/pip3
 
 - name: Create ~/.yamllint.yml configuration file
   template:
