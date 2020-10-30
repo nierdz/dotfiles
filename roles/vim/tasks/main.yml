@@ -10,6 +10,7 @@
   template:
     src: .vimrc.j2
     dest: ~/.vimrc
+    mode: 0644
 
 - name: Remove this shitty mouse support
   become: true
@@ -23,11 +24,13 @@
   file:
     path: "~/.vim"
     state: directory
+    mode: 0755
 
 - name: Create Vundle directory
   file:
     path: "~/.vim/bundle"
     state: directory
+    mode: 0755
 
 - name: Clone Vundle repository
   git:

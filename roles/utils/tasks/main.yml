@@ -250,7 +250,7 @@
     dest: ~/.ssh/config
     mode: 0600
 
-- name: Install pip packages
+- name: Install pip packages # noqa 301
   command: /usr/bin/pip3 install {{ item }}
   with_items: "{{ pip_packages }}"
 
@@ -258,6 +258,7 @@
   template:
     src: .yamllint.yml.j2
     dest: ~/.yamllint.yml
+    mode: 0644
 
 - name: Setup splash screen
   become: true
