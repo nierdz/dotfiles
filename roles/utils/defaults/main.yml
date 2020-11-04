@@ -103,6 +103,7 @@ useful_packages:
   - libreoffice-writer
   - lsb-release
   - lsof
+  - nautilus-nextcloud
   - net-tools
   - netcat
   - nextcloud-desktop
