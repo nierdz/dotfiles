@@ -64,5 +64,8 @@ for file in ~/.bashrc.d/*; do
   fi
 done
 
+# Hook direnv
+eval "$(direnv hook bash)"
+
 # Starhip (keep at the end)
 eval "$(starship init bash)"

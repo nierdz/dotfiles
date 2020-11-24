@@ -81,6 +81,7 @@ useful_packages:
   - ccze
   - cups
   - curl
+  - direnv
   - dnsutils
   - evince
   - file-roller
