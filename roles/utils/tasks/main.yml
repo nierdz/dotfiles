@@ -168,7 +168,7 @@
 - name: Add spotify apt-key
   become: true
   apt_key:
-    url: https://download.spotify.com/debian/pubkey.gpg
+    url: https://download.spotify.com/debian/pubkey_0D811D58.gpg
     state: present
   register: spotify_key_installed
   until: spotify_key_installed is success
