@@ -98,7 +98,7 @@ useful_packages:
   - htop
   - iptraf
   - jq
-  - keepassx
+  - keepassxc
   - libnss3-tools
   - libreoffice-calc
   - libreoffice-writer
