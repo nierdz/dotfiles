@@ -16,12 +16,14 @@ pre-install: ## Install dependencies
 			git \
 			gnome \
 			keepassx \
-			python-apt \
+			python3-apt \
 			python3-pip \
 			python3-virtualenv \
 			ruby \
 			vim \
 			terminator; \
+		sudo timedatectl set-timezone Europe/Paris; \
+		sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1; \
 	)
 	@$(MAKE) install-ansible
 	@$(MAKE) tests
