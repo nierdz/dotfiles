@@ -50,6 +50,7 @@ run-ansible: ## Run ansible on full playbook
 	@export \
 		ANSIBLE_STRATEGY_PLUGINS=venv/lib/python2.7/site-packages/ansible_mitogen/plugins/strategy \
 		&& ANSIBLE_STRATEGY=mitogen_linear \
+		&& if [[ $$DEBUG -eq 1 ]]; then export ANSIBLE_VERBOSITY=3; fi \
 		&& source $(VIRTUALENV_DIR)/bin/activate \
 		&& ansible-playbook --diff playbook.yml
 
