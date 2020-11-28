@@ -10,7 +10,6 @@
  - use base16 for vim and terminator
  - install php and composer
  - customize bash to my taste
- - install nodejs and some global packages
 
 # Requirements
 
