@@ -38,9 +38,9 @@ archived_binaries:
     check: terraform version
     url: https://releases.hashicorp.com/terraform/0.13.5/terraform_0.13.5_linux_amd64.zip
   packer:
-    version: 1.6.0
+    version: 1.6.5
     check: packer --version
-    url: https://releases.hashicorp.com/packer/1.6.0/packer_1.6.0_linux_amd64.zip
+    url: https://releases.hashicorp.com/packer/1.6.5/packer_1.6.5_linux_amd64.zip
   dive:
     version: 0.9.2
     check: dive --version
