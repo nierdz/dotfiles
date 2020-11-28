@@ -65,8 +65,8 @@ gems:
 google_cloud_sdk_version: "319.0.0-0"
 
 pip_packages:
-  - pre-commit==2.8.1
-  - docker==4.3.1
+  - pre-commit==2.9.2
+  - docker==4.4.0
 
 useful_packages:
   - ack
