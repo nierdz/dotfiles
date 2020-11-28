@@ -7,14 +7,14 @@ binaries:
     url: https://github.com/docker/compose/releases/download/1.27.4/docker-compose-Linux-x86_64
     name: docker-compose
   hadolint:
-    version: 1.18.0
+    version: 1.19.0
     check: hadolint --version
-    url: https://github.com/hadolint/hadolint/releases/download/v1.18.0/hadolint-Linux-x86_64
+    url: https://github.com/hadolint/hadolint/releases/download/v1.19.0/hadolint-Linux-x86_64
     name: hadolint
   jl:
-    version: 1.2.0
+    version: 1.4.0
     check: jl --version
-    url: https://github.com/koenbollen/jl/releases/download/v1.2.0/jl_linux_amd64
+    url: https://github.com/koenbollen/jl/releases/download/v1.4.0/jl_linux_amd64
     name: jl
   stern:
     version: 1.11.0
@@ -22,14 +22,14 @@ binaries:
     url: https://github.com/wercker/stern/releases/download/1.11.0/stern_linux_amd64
     name: stern
   kubectl:
-    version: 1.18.5
+    version: 1.19.4
     check: kubectl version --client=true
-    url: https://storage.googleapis.com/kubernetes-release/release/v1.18.5/bin/linux/amd64/kubectl
+    url: https://storage.googleapis.com/kubernetes-release/release/v1.19.4/bin/linux/amd64/kubectl
     name: kubectl
   mkcert:
-    version: 1.4.1
+    version: 1.4.3
     check: mkcert -version
-    url: https://github.com/FiloSottile/mkcert/releases/download/v1.4.1/mkcert-v1.4.1-linux-amd64
+    url: https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64
     name: mkcert
 
 archived_binaries:
@@ -38,21 +38,21 @@ archived_binaries:
     check: terraform version
     url: https://releases.hashicorp.com/terraform/0.13.5/terraform_0.13.5_linux_amd64.zip
   packer:
-    version: 1.6.0
+    version: 1.6.5
     check: packer --version
-    url: https://releases.hashicorp.com/packer/1.6.0/packer_1.6.0_linux_amd64.zip
+    url: https://releases.hashicorp.com/packer/1.6.5/packer_1.6.5_linux_amd64.zip
   dive:
     version: 0.9.2
     check: dive --version
     url: https://github.com/wagoodman/dive/releases/download/v0.9.2/dive_0.9.2_linux_amd64.tar.gz
   tflint:
-    version: 0.17.0
+    version: 0.21.0
     check: tflint --version
-    url: https://github.com/terraform-linters/tflint/releases/download/v0.17.0/tflint_linux_amd64.zip
+    url: https://github.com/terraform-linters/tflint/releases/download/v0.21.0/tflint_linux_amd64.zip
   starship:
-    version: 0.43.0
+    version: 0.47.0
     check: starship --version
-    url: https://github.com/starship/starship/releases/download/v0.43.0/starship-x86_64-unknown-linux-gnu.tar.gz
+    url: https://github.com/starship/starship/releases/download/v0.47.0/starship-x86_64-unknown-linux-gnu.tar.gz
   kustomize:
     version: 3.6.1
     check: kustomize version
@@ -64,13 +64,9 @@ gems:
 
 google_cloud_sdk_version: "319.0.0-0"
 
-nodejs_version: "14.x"
-nodejs_packages:
-  - gulp-cli
-
 pip_packages:
-  - pre-commit==2.8.1
-  - docker==4.3.1
+  - pre-commit==2.9.2
+  - docker==4.4.0
 
 useful_packages:
   - ack
