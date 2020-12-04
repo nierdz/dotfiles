@@ -102,6 +102,7 @@ useful_packages:
   - lsof
   - nautilus-nextcloud
   - net-tools
+  - nethogs
   - netcat
   - nextcloud-desktop
   - numix-gtk-theme
