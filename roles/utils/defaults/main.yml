@@ -92,6 +92,7 @@ useful_packages:
   - golang
   - hunspell-fr
   - htop
+  - ipcalc
   - iptraf
   - jq
   - keepassxc
