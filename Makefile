@@ -15,7 +15,6 @@ pre-install: ## Install dependencies
 		sudo apt install -y \
 			git \
 			gnome \
-			keepassx \
 			python3-apt \
 			python3-pip \
 			python3-virtualenv \
