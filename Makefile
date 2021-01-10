@@ -20,7 +20,6 @@ pre-install: ## Install dependencies
 			python3-virtualenv \
 			ruby \
 			vim \
-			terminator; \
 		sudo timedatectl set-timezone Europe/Paris; \
 		sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1; \
 	)

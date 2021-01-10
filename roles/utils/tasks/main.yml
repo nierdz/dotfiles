@@ -31,6 +31,19 @@
   package_facts:
     manager: "auto"
 
+- name: Install terminator from unstable repository
+  become: true
+  apt:
+    name: terminator
+    state: present
+    update_cache: true
+    default_release: unstable
+  when: '"terminator" not in ansible_facts.packages'
+  register: terminator_installed
+  until: terminator_installed is success
+  retries: 10
+  delay: 2
+
 - name: Install firefox from unstable repository
   become: true
   apt:
