@@ -112,6 +112,7 @@ useful_packages:
   - numix-gtk-theme
   - numix-icon-theme
   - pepperflashplugin-nonfree
+  - podman
   - python3-docker
   - python3-pip
   - rhythmbox
