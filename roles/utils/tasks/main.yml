@@ -234,10 +234,6 @@
     dest: ~/.ssh/config
     mode: 0600
 
-- name: Install pip packages # noqa 301
-  command: /usr/bin/pip3 install {{ item }}
-  with_items: "{{ pip_packages }}"
-
 - name: Create ~/.yamllint.yml configuration file
   template:
     src: .yamllint.yml.j2

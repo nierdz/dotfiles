@@ -67,10 +67,6 @@ gems:
   rake: "13.0.1"
   serverspec: "2.41.5"
 
-pip_packages:
-  - pre-commit==2.9.2
-  - docker==4.4.0
-
 useful_packages:
   - ack
   - aspell-en
