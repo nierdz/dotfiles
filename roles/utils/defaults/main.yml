@@ -64,7 +64,7 @@ archived_binaries:
     url: https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v3.6.1/kustomize_v3.6.1_linux_amd64.tar.gz
 
 gems:
-  rake: "13.0.1"
+  rake: "13.0.3"
   serverspec: "2.41.5"
 
 useful_packages:
