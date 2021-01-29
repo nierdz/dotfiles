@@ -43,7 +43,7 @@ install-ansible: ## Install ansible via pip
 		pip3 install -r requirements.txt; \
 	)
 
-run-ansible: ## Run ansible on full playbook
+ansible-run: ## Run ansible on full playbook
 	$(info --> Run ansible on full playbook)
 	@export \
 		ANSIBLE_STRATEGY_PLUGINS=venv/lib/python2.7/site-packages/ansible_mitogen/plugins/strategy \

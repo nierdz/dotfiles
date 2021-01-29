@@ -32,5 +32,5 @@ make install
 
  - If you just need to run ansible, use:
 ```
-make run-ansible
+make ansible-run
 ```
