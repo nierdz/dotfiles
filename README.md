@@ -1,4 +1,4 @@
-[![Build Status](https://github.com/nierdz/infra-docker/workflows/CI/badge.svg?branch=master)](https://github.com/nierdz/tools/actions?query=workflow%3ACI)
+[![CI Status](https://github.com/nierdz/tools/workflows/CI/badge.svg?branch=master)](https://github.com/nierdz/tools/actions?query=workflow%3ACI)
 
 # Install & configure my laptop
 
