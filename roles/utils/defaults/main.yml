@@ -51,9 +51,9 @@ archived_binaries:
     check: dive --version
     url: https://github.com/wagoodman/dive/releases/download/v0.9.2/dive_0.9.2_linux_amd64.tar.gz
   tflint:
-    version: 0.21.0
+    version: 0.23.1
     check: tflint --version
-    url: https://github.com/terraform-linters/tflint/releases/download/v0.21.0/tflint_linux_amd64.zip
+    url: https://github.com/terraform-linters/tflint/releases/download/v0.23.1/tflint_linux_amd64.zip
   starship:
     version: 0.48.0
     check: starship --version
