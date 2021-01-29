@@ -22,9 +22,3 @@
     src: aliases.j2
     dest: ~/.bashrc.d/aliases
     mode: 0755
-
-- name: Modify PATH
-  template:
-    src: path.j2
-    dest: ~/.bashrc.d/path
-    mode: 0755

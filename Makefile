@@ -1,6 +1,5 @@
 MAIN_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 VIRTUALENV_DIR := $(MAIN_DIR)/venv
-PATH := $(PATH):$(HOME)/.local/bin
 SHELL := /usr/bin/env bash
 
 help: ## Print this help
@@ -8,8 +7,8 @@ help: ## Print this help
 		| sort \
 		| awk 'BEGIN { FS = ":.*?## " }; { printf "\033[36m%-30s\033[0m %s\n", $$1, $$2 }'
 
-pre-install: ## Install dependencies
-	$(info --> Install dependencies)
+pre-install: ## Install first packages
+	$(info --> Install first packages)
 	@( \
 		sudo apt update; \
 		sudo apt install -y \
@@ -19,31 +18,24 @@ pre-install: ## Install dependencies
 			python3-pip \
 			python3-virtualenv \
 			ruby \
-			vim \
+			vim; \
 		sudo timedatectl set-timezone Europe/Paris; \
 		sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1; \
 	)
-	@$(MAKE) install-ansible
-	@$(MAKE) tests
 
-install: ## Install everything
-	$(info --> Install everything)
-	@$(MAKE) pre-install
-	@$(MAKE) run-ansible
-
-venv: ## Create python virtualenv if not exists
+venv: ## Create python virtualenv
+	$(info --> Create python virtualenv)
 	[[ -d $(VIRTUALENV_DIR) ]] || virtualenv --system-site-packages $(VIRTUALENV_DIR)
 
-install-ansible: ## Install ansible via pip
-	$(info --> Install ansible via `pip`)
-	@$(MAKE) venv
+install-dependencies: venv ## Install dependencies
+	$(info --> Install dependencies)
 	@( \
 		source $(VIRTUALENV_DIR)/bin/activate; \
 		pip3 install --upgrade setuptools; \
 		pip3 install -r requirements.txt; \
 	)
 
-run-ansible: ## Run ansible on full playbook
+ansible-run: ## Run ansible on full playbook
 	$(info --> Run ansible on full playbook)
 	@export \
 		ANSIBLE_STRATEGY_PLUGINS=venv/lib/python2.7/site-packages/ansible_mitogen/plugins/strategy \
@@ -52,12 +44,14 @@ run-ansible: ## Run ansible on full playbook
 		&& source $(VIRTUALENV_DIR)/bin/activate \
 		&& ansible-playbook --diff playbook.yml
 
+install: pre-install install-dependencies ansible-run ## Run all tasks to install everything
+	$(info --> Run all tasks to install everything)
+
 tests: ## Run all tests
 	$(info --> Run all tests)
 	@( \
 		source $(VIRTUALENV_DIR)/bin/activate; \
 		ansible-lint playbook.yml; \
 		ansible-playbook playbook.yml --syntax-check; \
-		yamllint -c .yamllint.yml .; \
 		pre-commit run --all-files; \
 	)
