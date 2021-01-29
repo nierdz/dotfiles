@@ -13,14 +13,21 @@
 
 # Requirements
 
- - You need to be sudoers before running this **playbook**. To do so, just add this line to `/etc/sudoers` or in a file inside `/etc/sudoers.d/`:
+ - First you nedd to be sudoers so you have ton install `sudo` package:
+
+ ```
+ #  apt install sudo
+ ```
+
+ - Then, add this line to `/etc/sudoers` or in a file inside `/etc/sudoers.d/`:
 ```
 user	ALL = NOPASSWD:ALL
 ```
 
- - Then, you can install dependencies:
+ - Finally, you can install everything in one simple target:
+
 ```
-make pre-install
+make install
 ```
 
 # Usage
