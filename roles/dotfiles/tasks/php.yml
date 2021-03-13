@@ -37,3 +37,4 @@
     command: require
     arguments: "{{ item }}"
   with_items: "{{ composer_global_packages }}"
+  when: composer_global_packages is defined and composer_global_packages | length > 0

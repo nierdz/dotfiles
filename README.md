@@ -1,17 +1,8 @@
 [![CI Status](https://github.com/nierdz/tools/workflows/CI/badge.svg?branch=master)](https://github.com/nierdz/tools/actions?query=workflow%3ACI)
 
-# Install & configure my laptop
+# Setup my laptop
 
- - it uses ansible in a virtualenv to deploy everythings
- - vim with vundle plugins
- - a bunch of binaries like docker-compose, docker, kubectl, kustomize, packer, terraform
- - a bunch of useful packages
- - install and configure starship to customize `$PS1`
- - use base16 for vim and terminator
- - install php and composer
- - customize bash to my taste
-
-# Requirements
+### Requirements
 
  - First you nedd to be sudoers so you have ton install `sudo` package:
 
@@ -30,7 +21,7 @@ user	ALL = NOPASSWD:ALL
 make install
 ```
 
-# Usage
+### Usage
 
  - Use `install` target to install everything:
 ```

@@ -1,5 +1,4 @@
 ---
-
 binaries:
   docker_compose:
     version: 1.28.2
@@ -77,6 +76,7 @@ useful_packages:
   - aspell-en
   - aspell-fr
   - bash-completion
+  - bind9
   - build-essential
   - ccze
   - cups
@@ -100,6 +100,7 @@ useful_packages:
   - iptraf
   - jq
   - keepassxc
+  - kitty
   - libnss3-tools
   - libreoffice-calc
   - libreoffice-writer
@@ -132,3 +133,13 @@ useful_packages:
   - wget
   - whois
   - xmlstarlet
+
+vundle_version: "master"
+
+php_packages:
+  - php7.4-cli
+  - php7.4-xml
+php_executable: /usr/bin/php
+composer_path: /usr/local/bin/composer
+composer_release: '2.0.9'
+composer_global_packages: []

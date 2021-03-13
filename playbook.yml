@@ -1,12 +1,5 @@
 ---
-
 - name: Install everything
   hosts: localhost
   roles:
-    - { role: utils, tags: ['utils'] }
-    - { role: bash, tags: ['bash'] }
-    - { role: vim, tags: ['vim'] }
-    - { role: base16, tags: ['base16'] }
-    - { role: php, tags: ['php'] }
-    - { role: gnome, tags: ['gnome'] }
-    - { role: bind, tags: ['bind'] }
+    - { role: dotfiles, tags: ['dotfiles'] }
