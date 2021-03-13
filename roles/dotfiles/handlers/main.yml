@@ -1,12 +1,7 @@
 ---
-
 - name: apt update
   become: true
   apt: update_cache=true
-  register: cache_updated
-  until: cache_updated is success
-  retries: 10
-  delay: 2
 
 - name: NetworkManager restart
   become: true
@@ -17,3 +12,9 @@
 - name: update-grub
   become: true
   command: /usr/sbin/update-grub
+
+- name: restart bind9
+  become: true
+  service:
+    name: bind9
+    state: restarted

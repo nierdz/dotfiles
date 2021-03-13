@@ -39,10 +39,6 @@
     update_cache: true
     default_release: unstable
   when: '"terminator" not in ansible_facts.packages'
-  register: terminator_installed
-  until: terminator_installed is success
-  retries: 10
-  delay: 2
 
 - name: Install firefox from unstable repository
   become: true
@@ -52,10 +48,6 @@
     update_cache: true
     default_release: unstable
   when: '"firefox" not in ansible_facts.packages'
-  register: firefox_installed
-  until: firefox_installed is success
-  retries: 10
-  delay: 2
 
 - name: Install useful packages
   become: true
@@ -63,10 +55,6 @@
     name: "{{ useful_packages }}"
     state: present
     update_cache: true
-  register: packages_installed
-  until: packages_installed is success
-  retries: 10
-  delay: 2
 
 - name: Check binaries versions
   shell: >
@@ -143,10 +131,6 @@
   become: true
   apt:
     deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  register: chrome_installed
-  until: chrome_installed is success
-  retries: 10
-  delay: 2
   when: '"google-chrome-stable" not in ansible_facts.packages'
 
 - name: Add spotify apt-key
@@ -154,10 +138,6 @@
   apt_key:
     url: https://download.spotify.com/debian/pubkey_0D811D58.gpg
     state: present
-  register: spotify_key_installed
-  until: spotify_key_installed is success
-  retries: 10
-  delay: 2
 
 - name: Add spotify repository
   become: true
@@ -174,20 +154,12 @@
     state: present
     update_cache: true
   when: '"spotify-client" not in ansible_facts.packages'
-  register: spotify_installed
-  until: spotify_installed is success
-  retries: 10
-  delay: 2
 
 - name: Add docker apt-key
   become: true
   apt_key:
     url: https://download.docker.com/linux/debian/gpg
     state: present
-  register: docker_key_installed
-  until: docker_key_installed is success
-  retries: 10
-  delay: 2
 
 - name: Add docker repository
   become: true
@@ -207,10 +179,6 @@
     state: present
     update_cache: true
   when: '"docker-ce" not in ansible_facts.packages'
-  register: docker_installed
-  until: docker_installed is success
-  retries: 10
-  delay: 2
 
 - name: Add {{ lookup('env','USER') }} to group docker
   become: true
@@ -248,3 +216,62 @@
     line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"'
   notify:
     - update-grub
+
+- name: Let me use Control+Shift+E key in terminator please !
+  command: gsettings set org.freedesktop.ibus.panel.emoji hotkey "['<Control><Shift>j']"
+  changed_when: false
+
+- name: Configure nautilus bookmarks (global)
+  become: true
+  template:
+    src: etc/xdg/user-dirs.defaults.j2
+    dest: /etc/xdg/user-dirs.defaults
+    mode: 0644
+    owner: root
+    group: root
+
+- name: Configure nautilus bookmarks (user)
+  template:
+    src: .config/user-dirs.dirs.j2
+    dest: ~/.config/user-dirs.dirs
+    mode: 0644
+
+- name: Configure NetworkManager to handle ethernet card
+  become: true
+  replace:
+    path: /etc/NetworkManager/NetworkManager.conf
+    regexp: '^\[ifupdown\]\nmanaged=[a-z]*$'
+    replace: '[ifupdown]\nmanaged=true'
+  notify:
+    - NetworkManager restart
+
+- name: Remove default gnome folders
+  file:
+    path: "~/{{ item }}"
+    state: absent
+  with_items:
+    - Desktop
+    - Documents
+    - Music
+    - Pictures
+    - Public
+    - Templates
+    - Videos
+
+- name: Configure bind9 options
+  become: true
+  template:
+    src: etc/bind/named.conf.options.j2
+    dest: /etc/bind/named.conf.options
+    owner: root
+    group: bind
+    mode: 0644
+  notify:
+    - restart bind9
+
+- name: Start bind9 at boot
+  become: true
+  service:
+    name: named
+    enabled: true
+    state: started
