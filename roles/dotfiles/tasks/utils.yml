@@ -31,15 +31,6 @@
   package_facts:
     manager: "auto"
 
-- name: Install terminator from unstable repository
-  become: true
-  apt:
-    name: terminator
-    state: present
-    update_cache: true
-    default_release: unstable
-  when: '"terminator" not in ansible_facts.packages'
-
 - name: Install firefox from unstable repository
   become: true
   apt:
@@ -217,7 +208,7 @@
   notify:
     - update-grub
 
-- name: Let me use Control+Shift+E key in terminator please !
+- name: Let me use Control+Shift+E please !
   command: gsettings set org.freedesktop.ibus.panel.emoji hotkey "['<Control><Shift>j']"
   changed_when: false
 
