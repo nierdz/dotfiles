@@ -47,6 +47,12 @@
     state: present
     update_cache: true
 
+- name: Configure ~/.config/kitty/kitty.conf
+  template:
+    src: .config/kitty/kitty.conf.j2
+    dest: ~/.config/kitty/kitty.conf
+    mode: 0644
+
 - name: Check binaries versions
   shell: >
     set -o pipefail;

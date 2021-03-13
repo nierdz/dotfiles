@@ -1,0 +1,74 @@
+# {{ ansible_managed }}
+# General
+copy_on_select yes
+detect_urls yes
+enable_audio_bell no
+mouse_hide_wait 1.0
+scrollback_lines 100000
+strip_trailing_spaces smart
+tab_bar_edge top
+tab_bar_style powerline
+
+# Terminator shortcuts
+enabled_layouts splits:split_axis=horizontal
+map ctrl+shift+o launch --location=hsplit
+map ctrl+shift+e launch --location=vsplit
+
+# Shortcuts
+map shift+up move_window up
+map shift+left move_window left
+map shift+right move_window right
+map shift+down move_window down
+map alt+left neighboring_window left
+map alt+right neighboring_window right
+map alt+up neighboring_window up
+map alt+down neighboring_window down
+map ctrl+page_down previous_tab
+map ctrl+page_up next_tab
+map ctrl+shift+page_down move_tab_backward
+map ctrl+shift+page_up move_tab_forward
+map kitty_mod+t new_tab_with_cwd
+map kitty_mod+enter new_window_with_cwd
+
+# Font
+font_family monospace
+bold_font auto
+italic_font auto
+bold_italic_font auto
+font_size 10.0
+
+# Base16 Material - kitty color config
+# Scheme by Nate Peterson
+background #263238
+foreground #eeffff
+selection_background #eeffff
+selection_foreground #263238
+url_color #b2ccd6
+cursor #eeffff
+active_border_color #546e7a
+inactive_border_color #2e3c43
+active_tab_background #263238
+active_tab_foreground #eeffff
+inactive_tab_background #2e3c43
+inactive_tab_foreground #b2ccd6
+tab_bar_background #2e3c43
+
+# normal
+color0 #263238
+color1 #f07178
+color2 #c3e88d
+color3 #ffcb6b
+color4 #82aaff
+color5 #c792ea
+color6 #89ddff
+color7 #eeffff
+
+# bright
+color8 #546e7a
+color9 #f78c6c
+color10 #2e3c43
+color11 #314549
+color12 #b2ccd6
+color13 #eeffff
+color14 #ff5370
+color15 #ffffff
