@@ -1,14 +1,14 @@
 ---
 binaries:
   docker_compose:
-    version: 1.28.2
+    version: 1.29.2
     check: docker-compose version --short
-    url: https://github.com/docker/compose/releases/download/1.27.4/docker-compose-Linux-x86_64
+    url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
     name: docker-compose
   hadolint:
-    version: 2.3.0
+    version: 2.4.1
     check: hadolint --version
-    url: https://github.com/hadolint/hadolint/releases/download/v2.3.0/hadolint-Linux-x86_64
+    url: https://github.com/hadolint/hadolint/releases/download/v2.4.1/hadolint-Linux-x86_64
     name: hadolint
   jl:
     version: 1.4.0
@@ -21,9 +21,9 @@ binaries:
     url: https://github.com/wercker/stern/releases/download/1.11.0/stern_linux_amd64
     name: stern
   kubectl:
-    version: 1.20.2
+    version: 1.21.1
     check: kubectl version --client=true
-    url: https://storage.googleapis.com/kubernetes-release/release/v1.19.4/bin/linux/amd64/kubectl
+    url: https://storage.googleapis.com/kubernetes-release/release/v1.21.1/bin/linux/amd64/kubectl
     name: kubectl
   mkcert:
     version: 1.4.3
@@ -31,14 +31,14 @@ binaries:
     url: https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64
     name: mkcert
   shfmt:
-    version: 3.2.1
+    version: 3.3.0
     check: shfmt --version
-    url: https://github.com/mvdan/sh/releases/download/v3.2.1/shfmt_v3.2.1_linux_amd64
+    url: https://github.com/mvdan/sh/releases/download/v3.3.0/shfmt_v3.3.0_linux_amd64
     name: shfmt
   mc:
-    version: RELEASE.2021-03-12T03-36-59Z
+    version: RELEASE.2021-05-18T03-39-44Z
     check: mc --version
-    url: https://dl.min.io/client/mc/release/linux-amd64/mc.RELEASE.2021-03-12T03-36-59Z
+    url: https://dl.min.io/client/mc/release/linux-amd64/mc.RELEASE.2021-05-18T03-39-44Z
     name: mc
 
 archived_binaries:
@@ -59,9 +59,9 @@ archived_binaries:
     check: tflint --version
     url: https://github.com/terraform-linters/tflint/releases/download/v0.23.1/tflint_linux_amd64.zip
   starship:
-    version: 0.48.0
+    version: 0.54.0
     check: starship --version
-    url: https://github.com/starship/starship/releases/download/v0.48.0/starship-x86_64-unknown-linux-gnu.tar.gz
+    url: https://github.com/starship/starship/releases/download/v0.54.0/starship-x86_64-unknown-linux-gnu.tar.gz
   kustomize:
     version: 3.6.1
     check: kustomize version
@@ -113,7 +113,6 @@ useful_packages:
   - nextcloud-desktop
   - numix-gtk-theme
   - numix-icon-theme
-  - pepperflashplugin-nonfree
   - podman
   - python3-docker
   - python3-pip
