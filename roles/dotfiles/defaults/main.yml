@@ -1,9 +1,9 @@
 ---
 binaries:
   docker_compose:
-    version: 1.28.2
+    version: 1.29.2
     check: docker-compose version --short
-    url: https://github.com/docker/compose/releases/download/1.27.4/docker-compose-Linux-x86_64
+    url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
     name: docker-compose
   hadolint:
     version: 2.3.0
