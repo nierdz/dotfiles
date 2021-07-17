@@ -18,7 +18,6 @@
     path: /usr/share/vim/vim82/defaults.vim
     regexp: '^.*set mouse=a'
     replace: '"    set mouse=a'
-  ignore_errors: true
 
 - name: Create Vim configuration directory
   file:
