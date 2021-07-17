@@ -140,5 +140,5 @@ php_packages:
   - php7.4-xml
 php_executable: /usr/bin/php
 composer_path: /usr/local/bin/composer
-composer_release: '2.0.9'
+composer_release: '2.1.3'
 composer_global_packages: []
