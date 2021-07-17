@@ -4,7 +4,7 @@
 
 ### Requirements
 
- - First you nedd to be sudoers so you have ton install `sudo` package:
+ - First you nedd to be sudoers, so you have to install `sudo` package:
 
  ```
  #  apt install sudo
