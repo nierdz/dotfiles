@@ -6,9 +6,9 @@ binaries:
     url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
     name: docker-compose
   hadolint:
-    version: 2.4.1
+    version: 2.6.0
     check: hadolint --version
-    url: https://github.com/hadolint/hadolint/releases/download/v2.4.1/hadolint-Linux-x86_64
+    url: https://github.com/hadolint/hadolint/releases/download/v2.6.0/hadolint-Linux-x86_64
     name: hadolint
   jl:
     version: 1.4.0
