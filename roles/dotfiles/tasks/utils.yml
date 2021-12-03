@@ -184,14 +184,33 @@
     groups: docker
     append: true
 
-- name: Download docker-compose autocomplete file
-  become: true
-  get_url:
-    url: "https://raw.githubusercontent.com/docker/compose/v{{ binaries.docker_compose.version }}/contrib/completion/bash/docker-compose"
-    dest: /etc/bash_completion.d/docker-compose
-    mode: 0644
-    owner: root
-    group: root
+- name: Create docker plugins folder
+  ansible.builtin.file:
+    state: directory
+    path: ~/.docker/cli-plugins
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+    mode: 0755
+
+- name: Check docker compose version
+  shell: >
+    set -o pipefail;
+    docker compose version | cut -f 4 -d " "
+  args:
+    executable: /usr/bin/bash
+  failed_when: false
+  changed_when: false
+  register: current_docker_compose_version
+
+- name: Install docker-compose as a docker plugin
+  ansible.builtin.get_url:
+    url: https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64
+    dest: ~/.docker/cli-plugins/docker-compose
+    force: true
+    mode: 0755
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+  when: current_docker_compose_version.stdout != docker_compose_version
 
 - name: Configure ssh client
   template:
