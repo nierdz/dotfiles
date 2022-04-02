@@ -1,17 +1,17 @@
 ---
 - name: Install php packages
   become: true
-  apt:
+  ansible.builtin.apt:
     name: "{{ php_packages }}"
 
 - name: Check if composer binary exists
-  stat:
+  ansible.builtin.stat:
     path: "{{ composer_path }}"
   register: composer_bin
   changed_when: false
 
 - name: Check composer version if already installed # noqa 306
-  shell: |
+  ansible.builtin.shell: |
     "{{ composer_path }}" --version \
     | cut -d " " -f3
   register: composer_version
@@ -20,7 +20,7 @@
 
 - name: Download Composer if release changed or composer was never installed
   become: true
-  get_url:
+  ansible.builtin.get_url:
     url: https://getcomposer.org/download/{{ composer_release }}/composer.phar
     dest: /usr/local/bin/composer
     force: true
@@ -31,7 +31,7 @@
         (not composer_bin.stat.exists)
 
 - name: Install global composer packages
-  composer:
+  community.general.composer:
     global_command: true
     no_dev: true
     command: require

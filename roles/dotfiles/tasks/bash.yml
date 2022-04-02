@@ -1,24 +1,24 @@
 ---
 - name: Create ~/.bashrc
-  template:
+  ansible.builtin.template:
     src: bashrc.j2
     dest: ~/.bashrc
     mode: 0755
 
 - name: Create ~/.bashrc.d directory
-  file:
+  ansible.builtin.file:
     path: ~/.bashrc.d
     state: directory
     mode: 0755
 
 - name: Add golang configuration
-  template:
+  ansible.builtin.template:
     src: golang.j2
     dest: ~/.bashrc.d/golang
     mode: 0755
 
 - name: Add some aliases
-  template:
+  ansible.builtin.template:
     src: aliases.j2
     dest: ~/.bashrc.d/aliases
     mode: 0755
