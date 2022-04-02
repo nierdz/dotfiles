@@ -1,38 +1,38 @@
 ---
 - name: Use vim as default editor
   become: true
-  alternatives:
+  community.general.alternatives:
     name: editor
     path: /usr/bin/vim
   changed_when: false
 
 - name: Create .vimrc configuration file
-  template:
+  ansible.builtin.template:
     src: .vimrc.j2
     dest: ~/.vimrc
     mode: 0644
 
 - name: Remove this shitty mouse support
   become: true
-  replace:
+  ansible.builtin.replace:
     path: /usr/share/vim/vim82/defaults.vim
     regexp: '^.*set mouse=a'
     replace: '"    set mouse=a'
 
 - name: Create Vim configuration directory
-  file:
+  ansible.builtin.file:
     path: "~/.vim"
     state: directory
     mode: 0755
 
 - name: Create Vundle directory
-  file:
+  ansible.builtin.file:
     path: "~/.vim/bundle"
     state: directory
     mode: 0755
 
 - name: Clone Vundle repository
-  git:
+  ansible.builtin.git:
     repo: "https://github.com/VundleVim/Vundle.vim.git"
     dest: "~/.vim/bundle/Vundle.vim"
     update: true
@@ -40,5 +40,5 @@
     version: "{{ vundle_version }}"
 
 - name: Install Vundle plugins
-  command: 'vim -E -s -c "source ~/.vimrc" -c PluginInstall -c qa'
+  ansible.builtin.command: 'vim -E -s -c "source ~/.vimrc" -c PluginInstall -c qa'
   changed_when: false

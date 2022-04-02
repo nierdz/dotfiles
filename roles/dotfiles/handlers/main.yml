@@ -1,20 +1,21 @@
 ---
-- name: apt update
+- name: update apt cache
   become: true
-  apt: update_cache=true
+  ansible.builtin.apt:
+    update_cache: true
 
-- name: NetworkManager restart
+- name: restart networkmanager
   become: true
-  systemd:
+  ansible.builtin.systemd:
     name: NetworkManager
     state: restarted
 
 - name: update-grub
   become: true
-  command: /usr/sbin/update-grub
+  ansible.builtin.command: /usr/sbin/update-grub
 
 - name: restart bind9
   become: true
-  service:
+  ansible.builtin.service:
     name: bind9
     state: restarted

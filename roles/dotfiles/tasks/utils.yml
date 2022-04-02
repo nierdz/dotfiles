@@ -1,7 +1,7 @@
 ---
 - name: Configure /etc/apt/preferences
   become: true
-  template:
+  ansible.builtin.template:
     src: etc/apt/preferences.j2
     dest: /etc/apt/preferences
     mode: 0644
@@ -12,7 +12,7 @@
 
 - name: Configure /etc/apt/sources.list
   become: true
-  template:
+  ansible.builtin.template:
     src: etc/apt/sources.list.j2
     dest: /etc/apt/sources.list
     mode: 0644
@@ -23,17 +23,17 @@
 
 - name: Remove useless packages
   become: true
-  apt:
+  ansible.builtin.apt:
     name: firefox-esr
     state: absent
 
 - name: Inject packages list in ansible_facts
-  package_facts:
+  ansible.builtin.package_facts:
     manager: "auto"
 
 - name: Install firefox from unstable repository
   become: true
-  apt:
+  ansible.builtin.apt:
     name: firefox
     state: present
     update_cache: true
@@ -42,19 +42,19 @@
 
 - name: Install useful packages
   become: true
-  apt:
+  ansible.builtin.apt:
     name: "{{ useful_packages }}"
     state: present
     update_cache: true
 
 - name: Configure ~/.config/kitty/kitty.conf
-  template:
+  ansible.builtin.template:
     src: .config/kitty/kitty.conf.j2
     dest: ~/.config/kitty/kitty.conf
     mode: 0644
 
 - name: Check binaries versions
-  shell: >
+  ansible.builtin.shell: >
     set -o pipefail;
     /usr/local/bin/{{ item.value.check }} | head -n 1
   args:
@@ -66,7 +66,7 @@
 
 - name: Download binaries if needed
   become: true
-  get_url:
+  ansible.builtin.get_url:
     url: "{{ item.item.value.url }}"
     dest: "/usr/local/bin/{{ item.item.value.name }}"
     force: true
@@ -77,7 +77,7 @@
   when: item.stdout is not search(item.item.value.version)
 
 - name: Check archived binaries versions
-  shell: >
+  ansible.builtin.shell: >
     set -o pipefail;
     /usr/local/bin/{{ item.value.check }} | head -n 1
   args:
@@ -89,7 +89,7 @@
 
 - name: Download archived binaries if needed
   become: true
-  unarchive:
+  ansible.builtin.unarchive:
     src: "{{ item.item.value.url }}"
     dest: /usr/local/bin
     remote_src: true
@@ -100,7 +100,7 @@
   when: item.stdout is not search(item.item.value.version)
 
 - name: Create starship config
-  template:
+  ansible.builtin.template:
     src: .config/starship.toml.j2
     dest: ~/.config/starship.toml
     mode: 0644
@@ -113,32 +113,32 @@
   with_dict: "{{ gems }}"
 
 - name: Create global git config
-  template:
+  ansible.builtin.template:
     src: .gitconfig.j2
     dest: ~/.gitconfig
     mode: 0644
 
 - name: Create golang directory
-  file:
+  ansible.builtin.file:
     path: "~/go"
     state: directory
     mode: 0755
 
 - name: Install evil chrome
   become: true
-  apt:
+  ansible.builtin.apt:
     deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   when: '"google-chrome-stable" not in ansible_facts.packages'
 
 - name: Add spotify apt-key
   become: true
-  apt_key:
+  ansible.builtin.apt_key:
     url: https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg
     state: present
 
 - name: Add spotify repository
   become: true
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "deb http://repository.spotify.com stable non-free"
     state: present
     filename: spotify
@@ -146,7 +146,7 @@
 
 - name: Install spotify
   become: true
-  apt:
+  ansible.builtin.apt:
     name: spotify-client
     state: present
     update_cache: true
@@ -154,13 +154,13 @@
 
 - name: Add docker apt-key
   become: true
-  apt_key:
+  ansible.builtin.apt_key:
     url: https://download.docker.com/linux/debian/gpg
     state: present
 
 - name: Add docker repository
   become: true
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "deb [arch=amd64] https://download.docker.com/linux/debian buster stable"
     state: present
     filename: docker
@@ -168,7 +168,7 @@
 
 - name: Install docker
   become: true
-  apt:
+  ansible.builtin.apt:
     name:
       - docker-ce
       - docker-ce-cli
@@ -179,7 +179,7 @@
 
 - name: Add {{ lookup('env','USER') }} to group docker
   become: true
-  user:
+  ansible.builtin.user:
     name: "{{ lookup('env','USER') }}"
     groups: docker
     append: true
@@ -193,7 +193,7 @@
     mode: 0755
 
 - name: Check docker compose version
-  shell: >
+  ansible.builtin.shell: >
     set -o pipefail;
     docker compose version | cut -f 4 -d " "
   args:
@@ -213,20 +213,20 @@
   when: current_docker_compose_version.stdout != docker_compose_version
 
 - name: Configure ssh client
-  template:
+  ansible.builtin.template:
     src: .ssh/config.j2
     dest: ~/.ssh/config
     mode: 0600
 
 - name: Create ~/.yamllint.yml configuration file
-  template:
+  ansible.builtin.template:
     src: .yamllint.yml.j2
     dest: ~/.yamllint.yml
     mode: 0644
 
 - name: Setup splash screen
   become: true
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/default/grub
     regexp: "^GRUB_CMDLINE_LINUX_DEFAULT=.*"
     line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"'
@@ -234,12 +234,12 @@
     - update-grub
 
 - name: Let me use Control+Shift+E please !
-  command: gsettings set org.freedesktop.ibus.panel.emoji hotkey "['<Control><Shift>j']"
+  ansible.builtin.command: gsettings set org.freedesktop.ibus.panel.emoji hotkey "['<Control><Shift>j']"
   changed_when: false
 
 - name: Configure nautilus bookmarks (global)
   become: true
-  template:
+  ansible.builtin.template:
     src: etc/xdg/user-dirs.defaults.j2
     dest: /etc/xdg/user-dirs.defaults
     mode: 0644
@@ -247,22 +247,22 @@
     group: root
 
 - name: Configure nautilus bookmarks (user)
-  template:
+  ansible.builtin.template:
     src: .config/user-dirs.dirs.j2
     dest: ~/.config/user-dirs.dirs
     mode: 0644
 
 - name: Configure NetworkManager to handle ethernet card
   become: true
-  replace:
+  ansible.builtin.replace:
     path: /etc/NetworkManager/NetworkManager.conf
     regexp: '^\[ifupdown\]\nmanaged=[a-z]*$'
     replace: '[ifupdown]\nmanaged=true'
   notify:
-    - NetworkManager restart
+    - restart networkmanager
 
 - name: Remove default gnome folders
-  file:
+  ansible.builtin.file:
     path: "~/{{ item }}"
     state: absent
   with_items:
@@ -276,7 +276,7 @@
 
 - name: Configure bind9 options
   become: true
-  template:
+  ansible.builtin.template:
     src: etc/bind/named.conf.options.j2
     dest: /etc/bind/named.conf.options
     owner: root
@@ -287,7 +287,7 @@
 
 - name: Start bind9 at boot
   become: true
-  service:
+  ansible.builtin.service:
     name: named
     enabled: true
     state: started
