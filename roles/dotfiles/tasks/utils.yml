@@ -105,13 +105,6 @@
     dest: ~/.config/starship.toml
     mode: 0644
 
-- name: Install useful gems
-  gem:
-    name: "{{ item.key }}"
-    version: "{{ item.value }}"
-    state: present
-  with_dict: "{{ gems }}"
-
 - name: Create global git config
   ansible.builtin.template:
     src: .gitconfig.j2
