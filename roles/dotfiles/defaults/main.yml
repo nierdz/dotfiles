@@ -80,6 +80,7 @@ useful_packages:
   - firmware-linux
   - firmware-linux-free
   - firmware-linux-nonfree
+  - fonts-hack
   - gdm3
   - gnome-core
   - gnome-shell
