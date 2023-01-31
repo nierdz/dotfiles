@@ -1,9 +1,9 @@
 ---
 - name: Import utils tasks
-  import_tasks: utils.yml
+  ansible.builtin.import_tasks: utils.yml
 - name: Import bash tasks
-  import_tasks: bash.yml
+  ansible.builtin.import_tasks: bash.yml
 - name: Import vim tasks
-  import_tasks: vim.yml
+  ansible.builtin.import_tasks: vim.yml
 - name: Import php tasks
-  import_tasks: php.yml
+  ansible.builtin.import_tasks: php.yml

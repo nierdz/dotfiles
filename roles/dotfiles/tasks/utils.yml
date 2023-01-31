@@ -170,7 +170,7 @@
     update_cache: true
   when: '"docker-ce" not in ansible_facts.packages'
 
-- name: Add {{ lookup('env','USER') }} to group docker
+- name: Add to docker group the user {{ lookup('env', 'USER') }}
   become: true
   ansible.builtin.user:
     name: "{{ lookup('env','USER') }}"
@@ -181,8 +181,8 @@
   ansible.builtin.file:
     state: directory
     path: ~/.docker/cli-plugins
-    owner: "{{ lookup('env','USER') }}"
-    group: "{{ lookup('env','USER') }}"
+    owner: "{{ lookup('env', 'USER') }}"
+    group: "{{ lookup('env', 'USER') }}"
     mode: 0755
 
 - name: Check docker compose version
@@ -201,8 +201,8 @@
     dest: ~/.docker/cli-plugins/docker-compose
     force: true
     mode: 0755
-    owner: "{{ lookup('env','USER') }}"
-    group: "{{ lookup('env','USER') }}"
+    owner: "{{ lookup('env', 'USER') }}"
+    group: "{{ lookup('env', 'USER') }}"
   when: current_docker_compose_version.stdout != docker_compose_version
 
 - name: Configure ssh client
