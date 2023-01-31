@@ -127,8 +127,8 @@ useful_packages:
 vundle_version: "master"
 
 php_packages:
-  - php8.1-cli
-  - php8.1-xml
+  - php8.2-cli
+  - php8.2-xml
 php_executable: /usr/bin/php
 composer_path: /usr/local/bin/composer
 composer_release: '2.3.3'
