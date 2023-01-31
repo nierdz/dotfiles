@@ -126,7 +126,7 @@
 - name: Add spotify apt-key
   become: true
   ansible.builtin.apt_key:
-    url: https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg
+    url: https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg
     state: present
 
 - name: Add spotify repository
@@ -154,7 +154,7 @@
 - name: Add docker repository
   become: true
   ansible.builtin.apt_repository:
-    repo: "deb [arch=amd64] https://download.docker.com/linux/debian buster stable"
+    repo: "deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_facts['distribution_release'] }} stable"
     state: present
     filename: docker
     update_cache: true
