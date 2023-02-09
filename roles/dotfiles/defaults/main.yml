@@ -10,11 +10,6 @@ binaries:
     check: jl --version
     url: https://github.com/koenbollen/jl/releases/download/v1.5.0/jl_linux_amd64
     name: jl
-  stern:
-    version: 1.11.0
-    check: stern --version
-    url: https://github.com/wercker/stern/releases/download/1.11.0/stern_linux_amd64
-    name: stern
   kubectl:
     version: 1.26.1
     check: kubectl version --client=true
@@ -61,6 +56,10 @@ archived_binaries:
     version: 3.6.1
     check: kustomize version
     url: https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v3.6.1/kustomize_v3.6.1_linux_amd64.tar.gz
+  stern:
+    version: 1.23.0
+    check: stern --version
+    url: https://github.com/stern/stern/releases/download/v1.23.0/stern_1.23.0_linux_amd64.tar.gz
 
 useful_packages:
   - ack
