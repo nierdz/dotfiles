@@ -21,9 +21,9 @@ binaries:
     url: https://github.com/FiloSottile/mkcert/releases/download/v1.4.3/mkcert-v1.4.3-linux-amd64
     name: mkcert
   shfmt:
-    version: 3.4.3
+    version: 3.6.0
     check: shfmt --version
-    url: https://github.com/mvdan/sh/releases/download/v3.4.3/shfmt_v3.4.3_linux_amd64
+    url: https://github.com/mvdan/sh/releases/download/v3.6.0/shfmt_v3.6.0_linux_amd64
     name: shfmt
   mc:
     version: RELEASE.2021-06-13T17-48-22Z
