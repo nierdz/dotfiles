@@ -60,6 +60,10 @@ archived_binaries:
     version: 1.23.0
     check: stern --version
     url: https://github.com/stern/stern/releases/download/v1.23.0/stern_1.23.0_linux_amd64.tar.gz
+  helm:
+    version: 3.11.1
+    check: helm version
+    url: https://get.helm.sh/helm-v3.11.1-linux-amd64.tar.gz
 
 useful_packages:
   - ack
