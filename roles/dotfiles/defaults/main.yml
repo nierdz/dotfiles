@@ -1,9 +1,9 @@
 ---
 binaries:
   hadolint:
-    version: 2.10.0
+    version: 2.12.0
     check: hadolint --version
-    url: https://github.com/hadolint/hadolint/releases/download/v2.10.0/hadolint-Linux-x86_64
+    url: https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64
     name: hadolint
   jl:
     version: 1.4.0
