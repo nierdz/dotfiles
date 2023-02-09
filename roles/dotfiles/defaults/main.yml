@@ -49,9 +49,9 @@ archived_binaries:
     check: tflint --version
     url: https://github.com/terraform-linters/tflint/releases/download/v0.35.0/tflint_linux_amd64.zip
   starship:
-    version: 1.5.4
+    version: 1.12.0
     check: starship --version
-    url: https://github.com/starship/starship/releases/download/v1.5.4/starship-x86_64-unknown-linux-gnu.tar.gz
+    url: https://github.com/starship/starship/releases/download/v1.12.0/starship-x86_64-unknown-linux-gnu.tar.gz
   kustomize:
     version: 3.6.1
     check: kustomize version
