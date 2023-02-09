@@ -6,9 +6,9 @@ binaries:
     url: https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64
     name: hadolint
   jl:
-    version: 1.4.0
+    version: 1.5.0
     check: jl --version
-    url: https://github.com/koenbollen/jl/releases/download/v1.4.0/jl_linux_amd64
+    url: https://github.com/koenbollen/jl/releases/download/v1.5.0/jl_linux_amd64
     name: jl
   stern:
     version: 1.11.0
