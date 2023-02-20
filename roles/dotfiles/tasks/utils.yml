@@ -173,7 +173,7 @@
 - name: Add to docker group the user {{ lookup('env', 'USER') }}
   become: true
   ansible.builtin.user:
-    name: "{{ lookup('env','USER') }}"
+    name: "{{ lookup('env', 'USER') }}"
     groups: docker
     append: true
 
@@ -293,3 +293,4 @@
 - name: Set Hack as default monospace font
   ansible.builtin.command: gsettings set org.gnome.desktop.interface monospace-font-name 'Hack Regular 11'
   when: default_monospace_font.stdout != "\'Hack Regular 11\'"
+  changed_when: true
