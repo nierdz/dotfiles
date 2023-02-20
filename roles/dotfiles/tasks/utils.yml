@@ -173,7 +173,7 @@
 - name: Add to docker group the user {{ lookup('env', 'USER') }}
   become: true
   ansible.builtin.user:
-    name: "{{ lookup('env','USER') }}"
+    name: "{{ lookup('env', 'USER') }}"
     groups: docker
     append: true
 
