@@ -293,3 +293,4 @@
 - name: Set Hack as default monospace font
   ansible.builtin.command: gsettings set org.gnome.desktop.interface monospace-font-name 'Hack Regular 11'
   when: default_monospace_font.stdout != "\'Hack Regular 11\'"
+  changed_when: true
