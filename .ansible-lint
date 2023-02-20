@@ -1,0 +1,7 @@
+---
+parseable: true
+quiet: true
+skip_list:
+  - name[casing] # ignored because we want lowercase handlers
+use_default_rules: true
+verbosity: 1
