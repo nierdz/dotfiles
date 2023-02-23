@@ -1,7 +1,10 @@
 ---
-- name: Import utils tasks
-  ansible.builtin.import_tasks: utils.yml
-  tags: [utils]
+- name: Import system tasks
+  ansible.builtin.import_tasks: system.yml
+  tags: [system]
+- name: Import tools tasks
+  ansible.builtin.import_tasks: tools.yml
+  tags: [tools]
 - name: Import bash tasks
   ansible.builtin.import_tasks: bash.yml
   tags: [bash]
