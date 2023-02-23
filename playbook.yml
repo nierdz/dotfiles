@@ -1,5 +1,10 @@
 ---
 - name: Install everything
   hosts: localhost
+  pre_tasks:
+    - name: Inject packages list in ansible_facts
+      ansible.builtin.package_facts:
+        manager: "auto"
+      tags: [always]
   roles:
     - { role: dotfiles, tags: ['dotfiles'] }

@@ -27,10 +27,6 @@
     name: firefox-esr
     state: absent
 
-- name: Inject packages list in ansible_facts
-  ansible.builtin.package_facts:
-    manager: "auto"
-
 - name: Install firefox from unstable repository
   become: true
   ansible.builtin.apt:
