@@ -139,3 +139,5 @@ composer_release: '2.3.3'
 composer_global_packages: []
 
 docker_compose_version: v2.4.0
+
+nodejs_version: 19.x

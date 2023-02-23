@@ -3,6 +3,9 @@
   ansible.builtin.import_tasks: utils.yml
 - name: Import bash tasks
   ansible.builtin.import_tasks: bash.yml
+- name: Import nodejs tasks
+  ansible.builtin.import_tasks: nodejs.yml
+  tags: [nodejs]
 - name: Import vim tasks
   ansible.builtin.import_tasks: vim.yml
 - name: Import php tasks
