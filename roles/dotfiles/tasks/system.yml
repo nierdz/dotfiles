@@ -126,3 +126,13 @@
   ansible.builtin.command: gsettings set org.gnome.desktop.interface monospace-font-name 'Hack Regular 11'
   when: default_monospace_font.stdout != "\'Hack Regular 11\'"
   changed_when: true
+
+- name: Check gnome recent files
+  ansible.builtin.command: gsettings get org.gnome.desktop.privacy remember-recent-files
+  register: remember_recent_files
+  changed_when: false
+
+- name: Disable gnome recent files
+  ansible.builtin.command: gsettings set org.gnome.desktop.privacy remember-recent-files false
+  when: remember_recent_files.stdout != 'false'
+  changed_when: true
