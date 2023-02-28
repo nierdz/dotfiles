@@ -1,0 +1,33 @@
+- name: Check aws version
+  ansible.builtin.shell: >
+    set -o pipefail;
+    /usr/local/bin/aws --version | cut -d ' ' -f 1 | cut -d '/' -f 2
+  args:
+    executable: /usr/bin/bash
+  failed_when: false
+  changed_when: false
+  register: current_aws_version
+
+- name: Download aws archive
+  become: true
+  ansible.builtin.unarchive:
+    src: https://awscli.amazonaws.com/awscli-exe-linux-x86_64-{{ aws_version }}.zip
+    dest: /usr/local
+    remote_src: true
+    mode: 0755
+    owner: root
+    group: root
+  when: current_aws_version.stdout != aws_version
+
+- name: Create aws symlinks
+  become: true
+  ansible.builtin.file:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    state: link
+    owner: root
+    group: root
+    mode: 0755
+  loop:
+    - { src: /usr/local/aws/dist/aws, dest: /usr/local/bin/aws }
+    - { src: /usr/local/aws/dist/aws_completer, dest: /usr/local/bin/aws_completer }

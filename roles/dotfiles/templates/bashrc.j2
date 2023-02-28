@@ -47,6 +47,7 @@ complete -C /usr/local/bin/packer packer
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 eval "$(kubectl completion bash)"
 complete -C /usr/local/bin/mc mc
+complete -C aws_completer aws
 
 # Source ~/.bashrc.d directory
 for file in ~/.bashrc.d/*; do

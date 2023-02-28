@@ -141,3 +141,5 @@ composer_global_packages: []
 docker_compose_version: v2.4.0
 
 nodejs_version: 19.x
+
+aws_version: 2.10.3
