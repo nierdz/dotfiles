@@ -87,7 +87,6 @@ useful_packages:
   - gdm3
   - gnome-core
   - gnome-shell
-  - gnome-tweak-tool
   - golang
   - hunspell-fr
   - htop
@@ -104,7 +103,7 @@ useful_packages:
   - nautilus-nextcloud
   - net-tools
   - nethogs
-  - netcat
+  - netcat-traditional
   - nextcloud-desktop
   - numix-gtk-theme
   - numix-icon-theme
