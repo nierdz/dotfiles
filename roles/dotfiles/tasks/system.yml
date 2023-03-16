@@ -8,7 +8,7 @@
     owner: root
     group: root
   notify:
-    - apt update
+    - update apt cache
 
 - name: Configure /etc/apt/sources.list
   become: true
@@ -19,7 +19,7 @@
     owner: root
     group: root
   notify:
-    - apt update
+    - update apt cache
 
 - name: Remove useless packages
   become: true
