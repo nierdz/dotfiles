@@ -26,9 +26,9 @@ binaries:
     url: https://github.com/mvdan/sh/releases/download/v3.6.0/shfmt_v3.6.0_linux_amd64
     name: shfmt
   mc:
-    version: RELEASE.2023-01-28T20-29-38Z
+    version: RELEASE.2023-02-28T00-12-59Z
     check: mc --version
-    url: https://dl.min.io/client/mc/release/linux-amd64/mc.RELEASE.2023-01-28T20-29-38Z
+    url: https://dl.min.io/client/mc/release/linux-amd64/mc.RELEASE.2023-02-28T00-12-59Z
     name: mc
 
 archived_binaries:
@@ -87,7 +87,6 @@ useful_packages:
   - gdm3
   - gnome-core
   - gnome-shell
-  - gnome-tweak-tool
   - golang
   - hunspell-fr
   - htop
@@ -104,7 +103,7 @@ useful_packages:
   - nautilus-nextcloud
   - net-tools
   - nethogs
-  - netcat
+  - netcat-traditional
   - nextcloud-desktop
   - numix-gtk-theme
   - numix-icon-theme
@@ -139,3 +138,7 @@ composer_release: '2.3.3'
 composer_global_packages: []
 
 docker_compose_version: v2.4.0
+
+nodejs_version: 19.x
+
+aws_version: 2.10.3

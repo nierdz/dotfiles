@@ -10,7 +10,7 @@
   register: composer_bin
   changed_when: false
 
-- name: Check composer version if already installed # noqa 306
+- name: Check composer version if already installed # noqa risky-shell-pipe
   ansible.builtin.shell: |
     "{{ composer_path }}" --version \
     | cut -d " " -f3

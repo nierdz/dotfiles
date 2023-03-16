@@ -1,9 +1,22 @@
 ---
-- name: Import utils tasks
-  ansible.builtin.import_tasks: utils.yml
+- name: Import system tasks
+  ansible.builtin.import_tasks: system.yml
+  tags: [system]
+- name: Import tools tasks
+  ansible.builtin.import_tasks: tools.yml
+  tags: [tools]
 - name: Import bash tasks
   ansible.builtin.import_tasks: bash.yml
+  tags: [bash]
+- name: Import cloud tasks
+  ansible.builtin.import_tasks: cloud.yml
+  tags: [cloud]
+- name: Import nodejs tasks
+  ansible.builtin.import_tasks: nodejs.yml
+  tags: [nodejs]
 - name: Import vim tasks
   ansible.builtin.import_tasks: vim.yml
+  tags: [vim]
 - name: Import php tasks
   ansible.builtin.import_tasks: php.yml
+  tags: [php]

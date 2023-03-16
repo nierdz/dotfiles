@@ -41,7 +41,6 @@ install-dependencies: ## Install dependencies
 			vim
 		sudo timedatectl set-timezone Europe/Paris
 		sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 1
-		pip3 install --upgrade setuptools
 		pip3 install -r requirements.txt
 
 ansible-run: ## Run ansible with ANSIBLE_ARGS
