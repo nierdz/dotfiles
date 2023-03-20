@@ -136,3 +136,13 @@
   ansible.builtin.command: gsettings set org.gnome.desktop.privacy remember-recent-files false
   when: remember_recent_files.stdout != 'false'
   changed_when: true
+
+- name: Check gnome event sound
+  ansible.builtin.command: gsettings get org.gnome.desktop.sound event-sounds
+  register: event_sounds
+  changed_when: false
+
+- name: Disable gnome event sound
+  ansible.builtin.command: gsettings set org.gnome.desktop.sound event-sounds false
+  when: event_sounds.stdout != 'false'
+  changed_when: true
