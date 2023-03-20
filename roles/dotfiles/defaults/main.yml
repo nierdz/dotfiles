@@ -66,7 +66,6 @@ archived_binaries:
     url: https://get.helm.sh/helm-v3.11.1-linux-amd64.tar.gz
 
 useful_packages:
-  - ack
   - aspell-en
   - aspell-fr
   - bash-completion
@@ -115,6 +114,7 @@ useful_packages:
   - rsync
   - shellcheck
   - siege
+  - silversearcher-ag
   - simple-scan
   - strace
   - subversion
