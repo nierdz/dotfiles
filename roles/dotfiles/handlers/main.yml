@@ -14,7 +14,6 @@
   become: true
   ansible.builtin.command: /usr/sbin/update-grub
 
-
 - name: restart bind9
   become: true
   ansible.builtin.service:
