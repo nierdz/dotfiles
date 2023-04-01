@@ -10,7 +10,7 @@
     name: NetworkManager
     state: restarted
 
-- name: update-grub
+- name: update-grub # noqa no-changed-when
   become: true
   ansible.builtin.command: /usr/sbin/update-grub
 
