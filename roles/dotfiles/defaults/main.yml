@@ -26,9 +26,9 @@ binaries:
     url: https://github.com/mvdan/sh/releases/download/v3.6.0/shfmt_v3.6.0_linux_amd64
     name: shfmt
   mc:
-    version: RELEASE.2023-02-28T00-12-59Z
+    version: RELEASE.2023-03-23T20-03-04Z
     check: mc --version
-    url: https://dl.min.io/client/mc/release/linux-amd64/mc.RELEASE.2023-02-28T00-12-59Z
+    url: https://dl.min.io/client/mc/release/linux-amd64/mc.RELEASE.2023-03-23T20-03-04Z
     name: mc
 
 archived_binaries:
