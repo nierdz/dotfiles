@@ -1,5 +1,5 @@
 ansible==8.2.0
 ansible-lint==6.17.2
 pre-commit==3.3.3
-setuptools==68.0.0
+setuptools==68.2.1
 yamllint==1.32.0
