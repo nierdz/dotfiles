@@ -3,5 +3,6 @@ parseable: true
 quiet: true
 skip_list:
   - name[casing] # ignored because we want lowercase handlers
+  - var-naming[no-role-prefix] # ignored because I don't care
 use_default_rules: true
 verbosity: 1
