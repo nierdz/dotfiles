@@ -4,18 +4,19 @@
 
 ### Requirements
 
- - First you nedd to be sudoers, so you have to install `sudo` package:
+ - If on Debian, install `sudo` package and add this to a file inside `/etc/sudoers.d/`:
 
- ```
- #  apt install sudo
- ```
+```
+#  apt install sudo
+```
 
- - Then, add this line to `/etc/sudoers` or in a file inside `/etc/sudoers.d/`:
 ```
 user	ALL = NOPASSWD:ALL
 ```
 
- - Finally, you can install everything in one simple target:
+ - If on macOS, install [Homebrew](https://brew.sh/)
+
+ - Then, install everything in one simple target:
 
 ```
 make install
