@@ -30,6 +30,7 @@ PACKAGE_MANAGER_INSTALL_OPTION :=
 PACKAGE_LIST := bash \
 								bash-completion@2 \
 								firefox \
+								fzf \
 								git \
 								gnu-tar \
 								keepassxc \

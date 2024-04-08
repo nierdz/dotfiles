@@ -83,6 +83,7 @@ useful_packages:
   - firmware-linux-free
   - firmware-linux-nonfree
   - fonts-hack
+  - fzf
   - gdm3
   - gnome-core
   - gnome-shell

@@ -47,6 +47,8 @@ fi
 {% endif %}
 complete -C /usr/local/bin/terraform terraform
 complete -C /usr/local/bin/packer packer
+eval "$(fzf --bash)"
+
 # shellcheck source=/dev/null
 eval "$(kubectl completion bash)"
 complete -C /usr/local/bin/mc mc
