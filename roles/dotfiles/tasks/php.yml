@@ -23,10 +23,10 @@
   become: true
   ansible.builtin.get_url:
     url: https://getcomposer.org/download/{{ composer_release }}/composer.phar
-    dest: /usr/local/bin/composer
+    dest: "{{ composer_path }}"
     force: true
     owner: root
-    group: root
+    group: '{% if ansible_distribution == "MacOSX" %}wheel{% else %}root{% endif %}'
     mode: 0755
   when: (composer_version.stdout.find(composer_release) != 0) or
         (not composer_bin.stat.exists)

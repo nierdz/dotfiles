@@ -133,7 +133,7 @@ php_packages:
   - php8.2-cli
   - php8.2-xml
 composer_path: /usr/local/bin/composer
-composer_release: '2.3.3'
+composer_release: '2.7.2'
 composer_global_packages: []
 
 docker_compose_version: v2.4.0
