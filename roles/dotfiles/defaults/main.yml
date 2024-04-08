@@ -66,7 +66,6 @@ archived_binaries:
     url: https://get.helm.sh/helm-v3.14.3-{% if ansible_distribution == "MacOSX" %}darwin-arm64{% else %}linux-amd64{% endif %}.tar.gz
 
 useful_packages:
-  - ack
   - aspell-en
   - aspell-fr
   - bash-completion
@@ -114,6 +113,7 @@ useful_packages:
   - rsync
   - shellcheck
   - siege
+  - silversearcher-ag
   - simple-scan
   - strace
   - subversion
