@@ -38,9 +38,13 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # Autocompletion
-if ! shopt -oq posix; then
+{% if ansible_distribution == "MacOSX" %}
+[[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+{% else %}
+if ! shopt -oq posix && [[ -r /usr/share/bash-completion/bash_completion ]]; then
   source /usr/share/bash-completion/bash_completion
 fi
+{% endif %}
 complete -C /usr/local/bin/terraform terraform
 complete -C /usr/local/bin/packer packer
 # shellcheck source=/dev/null
