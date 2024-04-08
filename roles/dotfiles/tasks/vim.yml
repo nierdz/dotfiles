@@ -5,19 +5,13 @@
     name: editor
     path: /usr/bin/vim
   changed_when: false
+  when: ansible_distribution != "MacOSX"
 
 - name: Create .vimrc configuration file
   ansible.builtin.template:
     src: .vimrc.j2
     dest: ~/.vimrc
     mode: 0644
-
-- name: Remove this shitty mouse support
-  become: true
-  ansible.builtin.replace:
-    path: /usr/share/vim/vim90/defaults.vim
-    regexp: '^.*set mouse=a'
-    replace: '"    set mouse=a'
 
 - name: Create Vim configuration directory
   ansible.builtin.file:

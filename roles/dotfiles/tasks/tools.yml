@@ -10,7 +10,7 @@
     set -o pipefail;
     /usr/local/bin/{{ item.value.check }} | head -n 1
   args:
-    executable: /usr/bin/bash
+    executable: "{{ lookup('ansible.builtin.env', 'SHELL') }}"
   failed_when: false
   changed_when: false
   register: current_binaries_versions
@@ -24,7 +24,7 @@
     force: true
     mode: 0755
     owner: root
-    group: root
+    group: '{% if ansible_distribution == "MacOSX" %}wheel{% else %}root{% endif %}'
   loop: "{{ current_binaries_versions.results }}"
   when: item.stdout is not search(item.item.value.version)
 
@@ -33,7 +33,7 @@
     set -o pipefail;
     /usr/local/bin/{{ item.value.check }} | head -n 1
   args:
-    executable: /usr/bin/bash
+    executable: "{{ lookup('ansible.builtin.env', 'SHELL') }}"
   failed_when: false
   changed_when: false
   register: current_archived_binaries_versions
@@ -47,7 +47,7 @@
     remote_src: true
     mode: 0755
     owner: root
-    group: root
+    group: '{% if ansible_distribution == "MacOSX" %}wheel{% else %}root{% endif %}'
   loop: "{{ current_archived_binaries_versions.results }}"
   when: item.stdout is not search(item.item.value.version)
 
@@ -73,13 +73,16 @@
   become: true
   ansible.builtin.apt:
     deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  when: '"google-chrome-stable" not in ansible_facts.packages'
+  when:
+    - ansible_distribution != "MacOSX"
+    - '"google-chrome-stable" not in ansible_facts.packages'
 
 - name: Add spotify apt-key
   become: true
   ansible.builtin.apt_key:
     url: https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg
     state: present
+  when: ansible_distribution != "MacOSX"
 
 - name: Add spotify repository
   become: true
@@ -88,6 +91,7 @@
     state: present
     filename: spotify
     update_cache: true
+  when: ansible_distribution != "MacOSX"
 
 - name: Install spotify
   become: true
@@ -95,13 +99,16 @@
     name: spotify-client
     state: present
     update_cache: true
-  when: '"spotify-client" not in ansible_facts.packages'
+  when:
+    - ansible_distribution != "MacOSX"
+    - '"spotify-client" not in ansible_facts.packages'
 
 - name: Add docker apt-key
   become: true
   ansible.builtin.apt_key:
     url: https://download.docker.com/linux/debian/gpg
     state: present
+  when: ansible_distribution != "MacOSX"
 
 - name: Add docker repository
   become: true
@@ -110,6 +117,7 @@
     state: present
     filename: docker
     update_cache: true
+  when: ansible_distribution != "MacOSX"
 
 - name: Install docker
   become: true
@@ -120,7 +128,9 @@
       - containerd.io
     state: present
     update_cache: true
-  when: '"docker-ce" not in ansible_facts.packages'
+  when:
+    - ansible_distribution != "MacOSX"
+    - '"docker-ce" not in ansible_facts.packages'
 
 - name: Add to docker group the user {{ lookup('env', 'USER') }}
   become: true
@@ -128,6 +138,7 @@
     name: "{{ lookup('env', 'USER') }}"
     groups: docker
     append: true
+  when: ansible_distribution != "MacOSX"
 
 - name: Create docker plugins folder
   ansible.builtin.file:
@@ -136,16 +147,18 @@
     owner: "{{ lookup('env', 'USER') }}"
     group: "{{ lookup('env', 'USER') }}"
     mode: 0755
+  when: ansible_distribution != "MacOSX"
 
 - name: Check docker compose version
   ansible.builtin.shell: >
     set -o pipefail;
     docker compose version | cut -f 4 -d " "
   args:
-    executable: /usr/bin/bash
+    executable: "{{ lookup('ansible.builtin.env', 'SHELL') }}"
   failed_when: false
   changed_when: false
   register: current_docker_compose_version
+  when: ansible_distribution != "MacOSX"
 
 - name: Install docker-compose as a docker plugin
   ansible.builtin.get_url:
@@ -155,7 +168,9 @@
     mode: 0755
     owner: "{{ lookup('env', 'USER') }}"
     group: "{{ lookup('env', 'USER') }}"
-  when: current_docker_compose_version.stdout != docker_compose_version
+  when:
+    - ansible_distribution != "MacOSX"
+    - current_docker_compose_version.stdout != docker_compose_version
 
 - name: Create ~/.yamllint.yml configuration file
   ansible.builtin.template:

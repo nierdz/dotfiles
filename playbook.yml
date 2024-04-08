@@ -6,5 +6,6 @@
       ansible.builtin.package_facts:
         manager: "auto"
       tags: [always]
+      when: ansible_distribution != "MacOSX"
   roles:
     - { role: dotfiles, tags: ['dotfiles'] }

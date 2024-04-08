@@ -3,6 +3,7 @@
   become: true
   ansible.builtin.apt:
     name: "{{ php_packages }}"
+  when: ansible_distribution != "MacOSX"
 
 - name: Check if composer binary exists
   ansible.builtin.stat:
