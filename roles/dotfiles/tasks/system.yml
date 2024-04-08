@@ -7,6 +7,7 @@
     mode: 0644
     owner: root
     group: root
+  when: ansible_distribution != "MacOSX"
   notify:
     - update apt cache
 
@@ -18,6 +19,7 @@
     mode: 0644
     owner: root
     group: root
+  when: ansible_distribution != "MacOSX"
   notify:
     - update apt cache
 
@@ -26,6 +28,7 @@
   ansible.builtin.apt:
     name: firefox-esr
     state: absent
+  when: ansible_distribution != "MacOSX"
 
 - name: Install firefox from unstable repository
   become: true
@@ -34,7 +37,9 @@
     state: present
     update_cache: true
     default_release: unstable
-  when: '"firefox" not in ansible_facts.packages'
+  when:
+    - ansible_distribution != "MacOSX"
+    - '"firefox" not in ansible_facts.packages'
 
 - name: Install useful packages
   become: true
@@ -42,6 +47,7 @@
     name: "{{ useful_packages }}"
     state: present
     update_cache: true
+  when: ansible_distribution != "MacOSX"
 
 - name: Configure ssh client
   ansible.builtin.template:
@@ -55,12 +61,14 @@
     dest: /etc/default/grub
     regexp: "^GRUB_CMDLINE_LINUX_DEFAULT=.*"
     line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"'
+  when: ansible_distribution != "MacOSX"
   notify:
     - update-grub
 
 - name: Let me use Control+Shift+E please !
   ansible.builtin.command: gsettings set org.freedesktop.ibus.panel.emoji hotkey "['<Control><Shift>j']"
   changed_when: false
+  when: ansible_distribution != "MacOSX"
 
 - name: Configure nautilus bookmarks (global)
   become: true
@@ -70,12 +78,14 @@
     mode: 0644
     owner: root
     group: root
+  when: ansible_distribution != "MacOSX"
 
 - name: Configure nautilus bookmarks (user)
   ansible.builtin.template:
     src: .config/user-dirs.dirs.j2
     dest: ~/.config/user-dirs.dirs
     mode: 0644
+  when: ansible_distribution != "MacOSX"
 
 - name: Configure NetworkManager to handle ethernet card
   become: true
@@ -83,6 +93,7 @@
     path: /etc/NetworkManager/NetworkManager.conf
     regexp: '^\[ifupdown\]\nmanaged=[a-z]*$'
     replace: '[ifupdown]\nmanaged=true'
+  when: ansible_distribution != "MacOSX"
   notify:
     - restart networkmanager
 
@@ -98,6 +109,7 @@
     - Public
     - Templates
     - Videos
+  when: ansible_distribution != "MacOSX"
 
 - name: Configure bind9
   become: true
@@ -109,6 +121,7 @@
     mode: 0644
   notify:
     - restart bind9
+  when: ansible_distribution != "MacOSX"
 
 - name: Start bind9 at boot
   become: true
@@ -116,23 +129,40 @@
     name: named
     enabled: true
     state: started
+  when: ansible_distribution != "MacOSX"
+
+- name: Install Hack fonts
+  ansible.builtin.unarchive:
+    src: https://github.com/source-foundry/Hack/releases/download/v3.003/Hack-v3.003-ttf.tar.gz
+    dest: ~/Library/Fonts/
+    remote_src: true
+    mode: 0755
+    owner: "{{ lookup('ansible.builtin.env', 'USER') }}"
+    group: admin
+  when: ansible_distribution == "MacOSX"
 
 - name: Check default monospace font
   ansible.builtin.command: gsettings get org.gnome.desktop.interface monospace-font-name
   register: default_monospace_font
   changed_when: false
+  when: ansible_distribution != "MacOSX"
 
 - name: Set Hack as default monospace font
   ansible.builtin.command: gsettings set org.gnome.desktop.interface monospace-font-name 'Hack Regular 11'
-  when: default_monospace_font.stdout != "\'Hack Regular 11\'"
   changed_when: true
+  when:
+    - ansible_distribution != "MacOSX"
+    - default_monospace_font.stdout != "\'Hack Regular 11\'"
 
 - name: Check gnome recent files
   ansible.builtin.command: gsettings get org.gnome.desktop.privacy remember-recent-files
   register: remember_recent_files
   changed_when: false
+  when: ansible_distribution != "MacOSX"
 
 - name: Disable gnome recent files
   ansible.builtin.command: gsettings set org.gnome.desktop.privacy remember-recent-files false
-  when: remember_recent_files.stdout != 'false'
   changed_when: true
+  when:
+    - ansible_distribution != "MacOSX"
+    - remember_recent_files.stdout != 'false'

@@ -4,6 +4,7 @@
   ansible.builtin.apt_key:
     url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
     state: present
+  when: ansible_distribution != "MacOSX"
 
 - name: Add nodejs repository
   become: true
@@ -12,10 +13,13 @@
     state: present
     filename: nodejs
     update_cache: true
+  when: ansible_distribution != "MacOSX"
 
 - name: Install nodejs package
   become: true
   ansible.builtin.apt:
     name: nodejs
     state: present
-  when: '"nodejs" not in ansible_facts.packages'
+  when:
+    - ansible_distribution != "MacOSX"
+    - '"nodejs" not in ansible_facts.packages'

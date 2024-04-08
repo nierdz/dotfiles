@@ -8,9 +8,6 @@
 - name: Import bash tasks
   ansible.builtin.import_tasks: bash.yml
   tags: [bash]
-- name: Import cloud tasks
-  ansible.builtin.import_tasks: cloud.yml
-  tags: [cloud]
 - name: Import nodejs tasks
   ansible.builtin.import_tasks: nodejs.yml
   tags: [nodejs]
