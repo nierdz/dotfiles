@@ -40,6 +40,7 @@ PACKAGE_LIST := bash \
 								node@20 \
 								php@8.2 \
 								pyenv \
+								shellcheck \
 								the_silver_searcher \
 								vim \
 								virtualenv
