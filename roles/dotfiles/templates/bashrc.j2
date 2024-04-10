@@ -62,6 +62,10 @@ for file in ~/.bashrc.d/*; do
   fi
 done
 
+# fzf
+export FZF_PREVIEW_COMMAND="bat --style=numbers,changes --wrap never --color always {} || cat {} || tree -C {}"
+export FZF_DEFAULT_OPTS="--preview '($FZF_PREVIEW_COMMAND) 2> /dev/null' --preview-window=right:50%"
+
 # Hook direnv
 eval "$(direnv hook bash)"
 
