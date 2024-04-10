@@ -64,6 +64,8 @@ archived_binaries:
     version: 3.14.3
     check: helm version
     url: https://get.helm.sh/helm-v3.14.3-{% if ansible_distribution == "MacOSX" %}darwin-arm64{% else %}linux-amd64{% endif %}.tar.gz
+    extra_opts:
+      - --strip-components=1
 
 useful_packages:
   - aspell-en
