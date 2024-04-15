@@ -166,3 +166,16 @@
   when:
     - ansible_distribution != "MacOSX"
     - remember_recent_files.stdout != 'false'
+
+- name: Check gnome event sound
+  ansible.builtin.command: gsettings get org.gnome.desktop.sound event-sounds
+  register: event_sounds
+  changed_when: false
+  when: ansible_distribution != "MacOSX"
+
+- name: Disable gnome event sound
+  ansible.builtin.command: gsettings set org.gnome.desktop.sound event-sounds false
+  changed_when: true
+  when:
+    - ansible_distribution != "MacOSX"
+    - event_sounds.stdout != 'false'

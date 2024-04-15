@@ -38,11 +38,17 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # Autocompletion
-if ! shopt -oq posix; then
+{% if ansible_distribution == "MacOSX" %}
+[[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+{% else %}
+if ! shopt -oq posix && [[ -r /usr/share/bash-completion/bash_completion ]]; then
   source /usr/share/bash-completion/bash_completion
 fi
+{% endif %}
 complete -C /usr/local/bin/terraform terraform
 complete -C /usr/local/bin/packer packer
+eval "$(fzf --bash)"
+
 # shellcheck source=/dev/null
 eval "$(kubectl completion bash)"
 complete -C /usr/local/bin/mc mc
@@ -55,6 +61,10 @@ for file in ~/.bashrc.d/*; do
     source "$file"
   fi
 done
+
+# fzf
+export FZF_PREVIEW_COMMAND="bat --style=numbers,changes --wrap never --color always {} || cat {} || tree -C {}"
+export FZF_DEFAULT_OPTS="--preview '($FZF_PREVIEW_COMMAND) 2> /dev/null' --preview-window=right:50%"
 
 # Hook direnv
 eval "$(direnv hook bash)"

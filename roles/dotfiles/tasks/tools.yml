@@ -48,6 +48,7 @@
     mode: 0755
     owner: root
     group: '{% if ansible_distribution == "MacOSX" %}wheel{% else %}root{% endif %}'
+    extra_opts: "{{ item.item.value.extra_opts | default(omit) }}"
   loop: "{{ current_archived_binaries_versions.results }}"
   when: item.stdout is not search(item.item.value.version)
 

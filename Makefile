@@ -29,7 +29,9 @@ PACKAGE_MANAGER := brew
 PACKAGE_MANAGER_INSTALL_OPTION :=
 PACKAGE_LIST := bash \
 								bash-completion@2 \
+								bat \
 								firefox \
+								fzf \
 								git \
 								gnu-tar \
 								keepassxc \
@@ -38,6 +40,7 @@ PACKAGE_LIST := bash \
 								node@20 \
 								php@8.2 \
 								pyenv \
+								shellcheck \
 								the_silver_searcher \
 								vim \
 								virtualenv
