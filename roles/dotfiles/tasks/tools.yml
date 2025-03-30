@@ -78,17 +78,20 @@
     - ansible_distribution != "MacOSX"
     - '"google-chrome-stable" not in ansible_facts.packages'
 
-- name: Add spotify apt-key
+- name: Add spotify GPG key
   become: true
-  ansible.builtin.apt_key:
-    url: https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg
-    state: present
+  ansible.builtin.get_url:
+    url: https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg
+    dest: /etc/apt/trusted.gpg.d/spotify.asc
+    mode: 0644
+    owner: root
+    group: root
   when: ansible_distribution != "MacOSX"
 
 - name: Add spotify repository
   become: true
   ansible.builtin.apt_repository:
-    repo: "deb http://repository.spotify.com stable non-free"
+    repo: "deb [signed-by=/etc/apt/trusted.gpg.d/spotify.asc] http://repository.spotify.com stable non-free"
     state: present
     filename: spotify
     update_cache: true
@@ -104,17 +107,20 @@
     - ansible_distribution != "MacOSX"
     - '"spotify-client" not in ansible_facts.packages'
 
-- name: Add docker apt-key
+- name: Add docker GPG key
   become: true
-  ansible.builtin.apt_key:
+  ansible.builtin.get_url:
     url: https://download.docker.com/linux/debian/gpg
-    state: present
+    dest: /etc/apt/trusted.gpg.d/docker.asc
+    mode: 0644
+    owner: root
+    group: root
   when: ansible_distribution != "MacOSX"
 
 - name: Add docker repository
   become: true
   ansible.builtin.apt_repository:
-    repo: "deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_facts['distribution_release'] }} stable"
+    repo: "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/docker.asc] https://download.docker.com/linux/debian bookworm stable"
     state: present
     filename: docker
     update_cache: true
