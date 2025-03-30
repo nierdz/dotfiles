@@ -26,9 +26,9 @@ binaries:
     url: https://github.com/mvdan/sh/releases/download/v3.8.0/shfmt_v3.8.0_{% if ansible_distribution == "MacOSX" %}darwin_arm64{% else %}linux_amd64{% endif %}
     name: shfmt
   mc:
-    version: RELEASE.2024-03-30T15-29-52Z
+    version: RELEASE.2025-03-12T17-29-24Z
     check: mc --version
-    url: https://dl.min.io/client/mc/release/{% if ansible_distribution == "MacOSX" %}darwin-arm64{% else %}linux-amd64{% endif %}/mc.RELEASE.2024-03-30T15-29-52Z
+    url: https://dl.min.io/client/mc/release/{% if ansible_distribution == "MacOSX" %}darwin-arm64{% else %}linux-amd64{% endif %}/mc.RELEASE.2025-03-12T17-29-24Z
     name: mc
 
 archived_binaries:
@@ -133,12 +133,12 @@ useful_packages:
 vundle_version: "master"
 
 php_packages:
-  - php8.2-cli
-  - php8.2-xml
+  - php8.4-cli
+  - php8.4-xml
 composer_path: /usr/local/bin/composer
 composer_release: '2.7.2'
 composer_global_packages: []
 
 docker_compose_version: v2.4.0
 
-nodejs_version: 20.x
+nodejs_version: 23.x
